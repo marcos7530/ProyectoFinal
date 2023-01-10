@@ -16,7 +16,7 @@ namespace ProyectoFinal.Modelo
         public string dir_cliente { get; set; }
 
         [Required]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage ="El formato del correo ingresado no es correcto")]
         [MaxLength(50, ErrorMessage = "El correo del cliente no puede ter mas de {0} caracteres.")]
         public string correo_cliente { get; set; }
 
