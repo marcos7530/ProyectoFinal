@@ -25,7 +25,7 @@ namespace ProyectoFinal.Controllers
         }
 
 
-        [HttpGet("(id)")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<Inmueble>> GetByIdAsync(int id)
         {
             var inmueble = await _servicio.GetByIdAsync(id);
@@ -48,7 +48,7 @@ namespace ProyectoFinal.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAsync(int id, Inmueble inmueble)
         {
-            if (id != inmueble.TipoInmuebleId)
+            if (id != inmueble.InmuebleId)
             {
                 return BadRequest();
             }

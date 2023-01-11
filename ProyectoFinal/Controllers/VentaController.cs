@@ -25,7 +25,7 @@ namespace ProyectoFinal.Controllers
         }
 
 
-        [HttpGet("(id)")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<Venta>> GetByIdAsync(int id)
         {
             var venta = await _servicio.GetByIdAsync(id);

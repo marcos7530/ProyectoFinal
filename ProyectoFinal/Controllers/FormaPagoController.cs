@@ -25,7 +25,7 @@ namespace ProyectoFinal.Controllers
         }
 
 
-        [HttpGet("(id)")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<FormaPago>> GetByIdAsync(int id)
         { 
          var formaPago=await _servicio.GetByIdAsync(id);
