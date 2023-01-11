@@ -5,7 +5,7 @@ namespace ProyectoFinal.Modelo
 {
     public class Inmueble
     {
-        public int Id { get; set; }
+        public int InmuebleId { get; set; }
 
         //[ForeignKey("TipoInmueble")]
         [MaxLength(2, ErrorMessage = "El id supera la cantidad maxima de {0} digitos.")]

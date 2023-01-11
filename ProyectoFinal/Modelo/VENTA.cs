@@ -6,7 +6,7 @@ namespace ProyectoFinal.Modelo
     public class Venta
     {
         [MaxLength(3, ErrorMessage = "El id supera la cantidad maxima de {0} digitos")]
-        public int Id { get; set; }
+        public int VentaId { get; set; }
 
         //[Required]
         [MaxLength(2, ErrorMessage = "El id supera la cantidad maxima de {0} digitos")]
