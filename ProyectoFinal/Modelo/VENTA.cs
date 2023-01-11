@@ -3,49 +3,48 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProyectoFinal.Modelo
 {
-    public class VENTA
+    public class Venta
     {
-        [Key]
         [MaxLength(3, ErrorMessage = "El id supera la cantidad maxima de {0} digitos")]
-        public int id_venta { get; set; }
+        public int Id { get; set; }
 
-        [Required]
-        [ForeignKey("INMUEBLE")]
+        //[Required]
         [MaxLength(2, ErrorMessage = "El id supera la cantidad maxima de {0} digitos")]
-        public int id_inmueble { get; set; }
+        public int InmuebleId { get; set; }
+        public Inmueble Inmueble { get; set; }
 
-        [Required]
-        [ForeignKey("CLIENTE")]
+        //[Required]
         [MaxLength(2, ErrorMessage = "El id supera la cantidad maxima de {0} digitos.")]
-        public int id_cliente { get; set; }
+        public int ClienteId { get; set; }
+        public ICollection<Cliente> Clientes { get; set; }
 
-        [Required]
-        [ForeignKey("CONDICION")]
+        //[Required]        
         [MaxLength(2, ErrorMessage = "El id supera la cantidad maxima de {0} digitos.")]
-        public int id_condicion { get; set; }
+        public int CondicionId { get; set; }
+        public ICollection<Condicion> Condicions { get; set; }
 
-        [Required]
-        [ForeignKey("FORMA_PAGO")]
+        //[Required]
         [MaxLength(2, ErrorMessage = "El id supera la cantidad maxima de {0} digitos.")]
-        public int id_forma_pago { get; set; }
+        public int FormaPagoId { get; set; }
+        public ICollection<FormaPago> FormaPagos { get; set; }
 
         [MaxLength(255, ErrorMessage ="La descripcion no puede superar los {0} caracteres.")]
-        public string? desc_venta { get; set; }
+        public string? VentaDesc { get; set; }
 
-        [Required]
+        //[Required]
         [MaxLength(10, ErrorMessage = "El total de la venta no puede superar los {0} digitos.")]
-        public int total_venta { get; set; }
+        public int VentaTotal { get; set; }
 
-        [Required]
+        ///[Required]
         [MaxLength(8, ErrorMessage = "El total del iva no puede superar los {0} digitos.")]
-        public int total_iva { get; set; }
+        public int VentaTotalIva { get; set; }
 
-        [Required]
+        //[Required]
         [MaxLength(12, ErrorMessage = "El total general no puede superar los {0} digitos.")]
-        public int total_general { get; set; }
+        public int VentaTotalGeneral { get; set; }
 
-        [Required]
-        public DateTime fecha_venta { get; set; }
+        //[Required]
+        public DateTime VentaFecha { get; set; }
 
     }
 }

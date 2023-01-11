@@ -2,14 +2,13 @@
 
 namespace ProyectoFinal.Modelo
 {
-    public class FORMA_PAGO
+    public class FormaPago
     {
-        [Key]
         [MaxLength(2, ErrorMessage = "El id supera la cantidad maxima de {0} digitos")]
-        public int id_forma_pago { get; set; }
+        public int Id { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(100, ErrorMessage = "La descripcion no puede tener mas de {0} caracteres")]
-        public string des_forma_pago { get; set; } 
+        public string FormaPagoDesc { get; set; } 
     }
 }

@@ -5,17 +5,17 @@ namespace ProyectoFinal.Context
 {
     public class ApplicationDbContext : DbContext
     {
-        public DbSet<CLIENTE> Clientes { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
 
-        public DbSet<CONDICION> Condiciones { get; set; }
+        public DbSet<Condicion> Condiciones { get; set; }
 
-        public DbSet<FORMA_PAGO> FormasPagos { get; set; }
+        public DbSet<FormaPago> FormasPagos { get; set; }
 
-        public DbSet<INMUEBLE> Inmuebles { get; set; }
+        public DbSet<Inmueble> Inmuebles { get; set; }
 
-        public DbSet<TIPO_INMUEBLE> TiposInmuebles { get; set; }
+        public DbSet<TipoInmueble> TiposInmuebles { get; set; }
 
-        public DbSet<VENTA> Ventas { get; set; }
+        public DbSet<Venta> Ventas { get; set; }
 
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
