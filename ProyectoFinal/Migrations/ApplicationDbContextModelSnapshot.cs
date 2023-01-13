@@ -148,22 +148,18 @@ namespace ProyectoFinal.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VentaId"));
 
                     b.Property<int?>("ClienteId")
-                        .IsRequired()
                         .HasMaxLength(2)
                         .HasColumnType("int");
 
                     b.Property<int?>("CondicionId")
-                        .IsRequired()
                         .HasMaxLength(2)
                         .HasColumnType("int");
 
                     b.Property<int?>("FormaPagoId")
-                        .IsRequired()
                         .HasMaxLength(2)
                         .HasColumnType("int");
 
                     b.Property<int?>("InmuebleId")
-                        .IsRequired()
                         .HasMaxLength(2)
                         .HasColumnType("int");
 
@@ -171,18 +167,18 @@ namespace ProyectoFinal.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<DateTime>("VentaFecha")
+                    b.Property<DateTime?>("VentaFecha")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("VentaTotal")
+                    b.Property<int?>("VentaTotal")
                         .HasMaxLength(10)
                         .HasColumnType("int");
 
-                    b.Property<int>("VentaTotalGeneral")
+                    b.Property<int?>("VentaTotalGeneral")
                         .HasMaxLength(12)
                         .HasColumnType("int");
 
-                    b.Property<int>("VentaTotalIva")
+                    b.Property<int?>("VentaTotalIva")
                         .HasMaxLength(8)
                         .HasColumnType("int");
 
@@ -195,7 +191,8 @@ namespace ProyectoFinal.Migrations
                     b.HasIndex("FormaPagoId");
 
                     b.HasIndex("InmuebleId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[InmuebleId] IS NOT NULL");
 
                     b.ToTable("Ventas");
                 });
@@ -215,27 +212,19 @@ namespace ProyectoFinal.Migrations
                 {
                     b.HasOne("ProyectoFinal.Modelo.Cliente", "Cliente")
                         .WithMany("Ventas")
-                        .HasForeignKey("ClienteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ClienteId");
 
                     b.HasOne("ProyectoFinal.Modelo.Condicion", "Condicion")
                         .WithMany("Ventas")
-                        .HasForeignKey("CondicionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CondicionId");
 
                     b.HasOne("ProyectoFinal.Modelo.FormaPago", "FormaPago")
                         .WithMany("Ventas")
-                        .HasForeignKey("FormaPagoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FormaPagoId");
 
                     b.HasOne("ProyectoFinal.Modelo.Inmueble", "Inmueble")
                         .WithOne("Ventas")
-                        .HasForeignKey("ProyectoFinal.Modelo.Venta", "InmuebleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProyectoFinal.Modelo.Venta", "InmuebleId");
 
                     b.Navigation("Cliente");
 

@@ -12,7 +12,7 @@ namespace ProyectoFinal.Modelo
 
         /*====================================================*/
 
-        public ICollection<Venta> Ventas { get; set; }
+        public ICollection<Venta>? Ventas { get; set; }
 
     }
 }

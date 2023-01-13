@@ -94,15 +94,15 @@ namespace ProyectoFinal.Migrations
                 {
                     VentaId = table.Column<int>(type: "int", maxLength: 3, nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    InmuebleId = table.Column<int>(type: "int", maxLength: 2, nullable: false),
-                    ClienteId = table.Column<int>(type: "int", maxLength: 2, nullable: false),
-                    CondicionId = table.Column<int>(type: "int", maxLength: 2, nullable: false),
-                    FormaPagoId = table.Column<int>(type: "int", maxLength: 2, nullable: false),
+                    InmuebleId = table.Column<int>(type: "int", maxLength: 2, nullable: true),
+                    ClienteId = table.Column<int>(type: "int", maxLength: 2, nullable: true),
+                    CondicionId = table.Column<int>(type: "int", maxLength: 2, nullable: true),
+                    FormaPagoId = table.Column<int>(type: "int", maxLength: 2, nullable: true),
                     VentaDesc = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    VentaTotal = table.Column<int>(type: "int", maxLength: 10, nullable: false),
-                    VentaTotalIva = table.Column<int>(type: "int", maxLength: 8, nullable: false),
-                    VentaTotalGeneral = table.Column<int>(type: "int", maxLength: 12, nullable: false),
-                    VentaFecha = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    VentaTotal = table.Column<int>(type: "int", maxLength: 10, nullable: true),
+                    VentaTotalIva = table.Column<int>(type: "int", maxLength: 8, nullable: true),
+                    VentaTotalGeneral = table.Column<int>(type: "int", maxLength: 12, nullable: true),
+                    VentaFecha = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -111,26 +111,22 @@ namespace ProyectoFinal.Migrations
                         name: "FK_Ventas_Clientes_ClienteId",
                         column: x => x.ClienteId,
                         principalTable: "Clientes",
-                        principalColumn: "ClienteId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ClienteId");
                     table.ForeignKey(
                         name: "FK_Ventas_Condiciones_CondicionId",
                         column: x => x.CondicionId,
                         principalTable: "Condiciones",
-                        principalColumn: "CondicionId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "CondicionId");
                     table.ForeignKey(
                         name: "FK_Ventas_FormasPagos_FormaPagoId",
                         column: x => x.FormaPagoId,
                         principalTable: "FormasPagos",
-                        principalColumn: "FormaPagoId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "FormaPagoId");
                     table.ForeignKey(
                         name: "FK_Ventas_Inmuebles_InmuebleId",
                         column: x => x.InmuebleId,
                         principalTable: "Inmuebles",
-                        principalColumn: "InmuebleId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "InmuebleId");
                 });
 
             migrationBuilder.CreateIndex(
@@ -157,7 +153,8 @@ namespace ProyectoFinal.Migrations
                 name: "IX_Ventas_InmuebleId",
                 table: "Ventas",
                 column: "InmuebleId",
-                unique: true);
+                unique: true,
+                filter: "[InmuebleId] IS NOT NULL");
         }
 
         /// <inheritdoc />

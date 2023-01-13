@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <OpenApiReference Include="..\..\..\..\OneDrive\Desktop\swagger.json" CodeGenerator="NSwagCSharp" Namespace="ClienteSwagger" ClassName="ClienteSwagger" Link="OpenAPIs\swagger.json" />
+    <OpenApiReference Include="..\..\..\..\Downloads\swagger.json" CodeGenerator="NSwagCSharp" Namespace="ClienteSwagger" ClassName="ClienteSwagger" Link="OpenAPIs\swagger.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,6 +20,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
   </ItemGroup>
 
 </Project>
