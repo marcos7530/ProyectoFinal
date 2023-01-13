@@ -23,7 +23,7 @@ namespace ProyectoFinal.Modelo
 
 
         /*===============================================*/
-        public Venta Ventas { get; set; }
-        public TipoInmueble Tipo { get; set; }
+        public Venta? Ventas { get; set; }
+        public TipoInmueble? Tipo { get; set; }
     }
 }

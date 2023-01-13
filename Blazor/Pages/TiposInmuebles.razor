@@ -1,0 +1,51 @@
+﻿@page "/tiposInmuebles"
+
+<h3>Tipos de Inmuebles</h3>
+
+@if (result != null)
+{
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Descripcion</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+            @foreach (ClienteSwagger.TipoInmueble tipoInmueble in result)
+            {
+                            <tr>
+                            <th>@tipoInmueble.TipoInmuebleId</th>
+                            <th>@tipoInmueble.TipoInmuebleDesc</th>
+                    <th><a href="formaPagoDetails/@tipoInmueble.TipoInmuebleId"><i>Editar</i></a></th>
+                    <th><a href="formaPagoDelete/@tipoInmueble.TipoInmuebleId"><i>Eliminar</i></a></th>
+                            </tr>
+            }
+                    </tbody>
+                </table>
+
+}
+else
+{
+            <h3>No se encontraron resultados</h3>
+}
+
+
+@code {
+
+    private ICollection<ClienteSwagger.TipoInmueble> result;
+
+    private ClienteSwagger.ClienteSwagger client = new ClienteSwagger.ClienteSwagger("https://localhost:7179/", new HttpClient());
+
+    private async Task Refresh()
+    {
+        result = await client.TipoInmuebleAllAsync();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Refresh();
+    }
+}

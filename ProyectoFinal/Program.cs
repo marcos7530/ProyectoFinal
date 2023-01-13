@@ -1,14 +1,23 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using ProyectoFinal.Context;
 using ProyectoFinal.Context.Repositorio;
 using ProyectoFinal.Context.Repositorios;
 using ProyectoFinal.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
+var MyCors = "MyCors";
+
+
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+/*================================================*/
+/*Esto lo agregue yo*/
+builder.Services.AddCors(option => option.AddPolicy(MyCors, builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
+/*================================================*/
 
 builder.Services.AddDbContext<ApplicationDbContext>(
         options => options.UseSqlServer(builder.Configuration.GetConnectionString("Conexion")));
@@ -49,6 +58,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+/*=====================================*/
+/*ESTO TAMBIEN LO AGREGUE YO*/
+app.UseCors(MyCors);
+/*====================================================*/
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

@@ -1,0 +1,50 @@
+﻿@page "/condiciones"
+
+<h3>Condiciones</h3>
+
+@if (result != null)
+{
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Descripcion</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (ClienteSwagger.Condicion condicion in result)
+            {
+                    <tr>
+                    <th>@condicion.CondicionId</th>
+                    <th>@condicion.CondicionDesc</th>
+                    <th><a href="formaPagoDetails/@condicion.CondicionId"><i>Editar</i></a></th>
+                    <th><a href="formaPagoDelete/@condicion.CondicionId"><i>Eliminar</i></a></th>
+                    </tr>
+            }
+            </tbody>
+        </table>
+}
+else
+{
+        <h3>No se encontraron resultados</h3>
+}
+
+
+@code {
+
+    private ICollection<ClienteSwagger.Condicion> result;
+
+    private ClienteSwagger.ClienteSwagger client = new ClienteSwagger.ClienteSwagger("https://localhost:7179/", new HttpClient());
+
+    private async Task Refresh()
+    {
+        result = await client.CondicionAllAsync();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Refresh();
+    }
+}

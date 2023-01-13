@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProyectoFinal.Context;
 
@@ -11,9 +12,11 @@ using ProyectoFinal.Context;
 namespace ProyectoFinal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230113154153_segunda")]
+    partial class segunda
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -263,7 +266,8 @@ namespace ProyectoFinal.Migrations
 
             modelBuilder.Entity("ProyectoFinal.Modelo.Inmueble", b =>
                 {
-                    b.Navigation("Ventas");
+                    b.Navigation("Ventas")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ProyectoFinal.Modelo.TipoInmueble", b =>

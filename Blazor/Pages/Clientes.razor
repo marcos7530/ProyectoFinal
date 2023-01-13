@@ -1,0 +1,59 @@
+﻿@page "/clientes"
+
+<h3>Clientes</h3>
+
+@if (result != null)
+{
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Direccion</th>
+                        <th>Correo</th>
+                        <th>Telefono</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+            @foreach (ClienteSwagger.Cliente cliente in result)
+            {
+                            <tr>
+                            <th>@cliente.ClienteId</th>
+                            <th>@cliente.ClienteNombre</th>
+                            <th>@cliente.CleinteDireccion</th>
+                            <th>@cliente.ClienteCorreo</th>
+                            <th>@cliente.ClienteTelefono</th>
+                            <th></th>
+                            <th></th>
+                            <th><a href="formaPagoDetails/@cliente.ClienteId"><i>Editar</i></a></th>
+                            <th><a href="formaPagoDelete/@cliente.ClienteId"><i>Eliminar</i></a></th>
+                            </tr>
+            }
+                    </tbody>
+                </table>
+
+}
+else
+{
+            <h3>No se encontraron resultados</h3>
+}
+
+
+@code {
+
+    private ICollection<ClienteSwagger.Cliente> result;
+
+    private ClienteSwagger.ClienteSwagger client = new ClienteSwagger.ClienteSwagger("https://localhost:7179/", new HttpClient());
+
+    private async Task Refresh()
+    {
+        result = await client.ClienteAllAsync();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Refresh();
+    }
+}

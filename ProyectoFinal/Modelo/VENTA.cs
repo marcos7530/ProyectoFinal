@@ -10,21 +10,21 @@ namespace ProyectoFinal.Modelo
             "El id supera la cantidad maxima de {0} digitos")]
         public int VentaId { get; set; }
 
-        [ ForeignKey("Inmueble"), MaxLength(2, ErrorMessage = 
+        [ForeignKey("Inmueble"), MaxLength(2, ErrorMessage = 
             "El id supera la cantidad maxima de {0} digitos")]
-        public int InmuebleId { get; set; }
+        public int? InmuebleId { get; set; }
         
         [ForeignKey("Cliente"), MaxLength(2, ErrorMessage = 
             "El id supera la cantidad maxima de {0} digitos.")]
-        public int ClienteId { get; set; }
+        public int? ClienteId { get; set; }
                 
         [ForeignKey("Condicion"), MaxLength(2, ErrorMessage = 
             "El id supera la cantidad maxima de {0} digitos.")]
-        public int CondicionId { get; set; }
+        public int? CondicionId { get; set; }
                
         [ForeignKey("FormaPago"), MaxLength(2, ErrorMessage = 
             "El id supera la cantidad maxima de {0} digitos.")]
-        public int FormaPagoId { get; set; }
+        public int? FormaPagoId { get; set; }
         
         [MaxLength(255, ErrorMessage =
             "La descripcion no puede superar los {0} caracteres.")]

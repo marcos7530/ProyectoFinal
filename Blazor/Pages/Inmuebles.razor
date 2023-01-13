@@ -1,0 +1,57 @@
+﻿@page "/inmuebles"
+
+<h3>Inmuebles</h3>
+
+@if (result != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Tipo</th>
+                <th>Descripcion</th>
+                <th>Ubicacion</th>
+                <th>Costo</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ClienteSwagger.Inmueble inmueble in result)
+            {
+                <tr>
+                    <th>@inmueble.InmuebleId</th>
+                    <th>@inmueble.Tipo.TipoInmuebleDesc</th>
+                    <th>@inmueble.InmuebleDesc</th>
+                    <th>@inmueble.InmuebleUbic</th>
+                    <th>@inmueble.InmuebleCosto</th>
+                    <th><a href="formaPagoDetails/@inmueble.InmuebleId"><i>Editar</i></a></th>
+                    <th><a href="formaPagoDelete/@inmueble.InmuebleId"><i>Eliminar</i></a></th>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+else
+{
+    <h3>No se encontraron resultados</h3>
+}
+
+
+@code {
+
+    private ICollection<ClienteSwagger.Inmueble> result;
+
+    private ClienteSwagger.ClienteSwagger client = new ClienteSwagger.ClienteSwagger("https://localhost:7179/", new HttpClient());
+
+    private async Task Refresh()
+    {
+        result = await client.InmuebleAllAsync();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Refresh();
+    }
+}
