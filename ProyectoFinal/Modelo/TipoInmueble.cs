@@ -12,6 +12,6 @@ namespace ProyectoFinal.Modelo
         public string? TipoInmuebleDesc { get; set; }
 
         /*===================================================*/
-        public ICollection<Inmueble>? Inmueble { get; set; }
+        //public ICollection<Inmueble>? Inmueble { get; set; }
     }
 }

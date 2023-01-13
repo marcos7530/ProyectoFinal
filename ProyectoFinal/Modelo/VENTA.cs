@@ -42,12 +42,12 @@ namespace ProyectoFinal.Modelo
             "El total general no puede superar los {0} digitos.")]
         public int? VentaTotalGeneral { get; set; }
 
-        public DateTime? VentaFecha { get; set; }
+        public DateTime? VentaFecha { get; set; }//
 
-        /*=============================================*/
-        public Inmueble? Inmueble { get; set; }
-        public Condicion? Condicion { get; set; }
-        public Cliente? Cliente { get; set; }
-        public FormaPago? FormaPago { get; set; }
+        ///*=============================================*/
+        //public Inmueble? Inmueble { get; set; }
+        //public Condicion? Condicion { get; set; }
+        //public Cliente? Cliente { get; set; }
+        //public FormaPago? FormaPago { get; set; }
     }
 }

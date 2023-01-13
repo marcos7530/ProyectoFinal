@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProyectoFinal.Context;
 
@@ -11,9 +12,11 @@ using ProyectoFinal.Context;
 namespace ProyectoFinal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230113220933_tercera")]
+    partial class tercera
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,6 +118,8 @@ namespace ProyectoFinal.Migrations
 
                     b.HasKey("InmuebleId");
 
+                    b.HasIndex("TipoInmuebleId");
+
                     b.ToTable("Inmuebles");
                 });
 
@@ -183,6 +188,17 @@ namespace ProyectoFinal.Migrations
                     b.HasKey("VentaId");
 
                     b.ToTable("Ventas");
+                });
+
+            modelBuilder.Entity("ProyectoFinal.Modelo.Inmueble", b =>
+                {
+                    b.HasOne("ProyectoFinal.Modelo.TipoInmueble", "Tipo")
+                        .WithMany()
+                        .HasForeignKey("TipoInmuebleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Tipo");
                 });
 #pragma warning restore 612, 618
         }

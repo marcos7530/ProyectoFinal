@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProyectoFinal.Context;
 
@@ -11,9 +12,11 @@ using ProyectoFinal.Context;
 namespace ProyectoFinal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230113222803_cuarta")]
+    partial class cuarta
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,6 +118,8 @@ namespace ProyectoFinal.Migrations
 
                     b.HasKey("InmuebleId");
 
+                    b.HasIndex("TipoInmuebleId");
+
                     b.ToTable("Inmuebles");
                 });
 
@@ -182,7 +187,57 @@ namespace ProyectoFinal.Migrations
 
                     b.HasKey("VentaId");
 
+                    b.HasIndex("ClienteId");
+
+                    b.HasIndex("CondicionId");
+
+                    b.HasIndex("FormaPagoId");
+
                     b.ToTable("Ventas");
+                });
+
+            modelBuilder.Entity("ProyectoFinal.Modelo.Inmueble", b =>
+                {
+                    b.HasOne("ProyectoFinal.Modelo.TipoInmueble", null)
+                        .WithMany("Inmueble")
+                        .HasForeignKey("TipoInmuebleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ProyectoFinal.Modelo.Venta", b =>
+                {
+                    b.HasOne("ProyectoFinal.Modelo.Cliente", null)
+                        .WithMany("Ventas")
+                        .HasForeignKey("ClienteId");
+
+                    b.HasOne("ProyectoFinal.Modelo.Condicion", null)
+                        .WithMany("Ventas")
+                        .HasForeignKey("CondicionId");
+
+                    b.HasOne("ProyectoFinal.Modelo.FormaPago", null)
+                        .WithMany("Ventas")
+                        .HasForeignKey("FormaPagoId");
+                });
+
+            modelBuilder.Entity("ProyectoFinal.Modelo.Cliente", b =>
+                {
+                    b.Navigation("Ventas");
+                });
+
+            modelBuilder.Entity("ProyectoFinal.Modelo.Condicion", b =>
+                {
+                    b.Navigation("Ventas");
+                });
+
+            modelBuilder.Entity("ProyectoFinal.Modelo.FormaPago", b =>
+                {
+                    b.Navigation("Ventas");
+                });
+
+            modelBuilder.Entity("ProyectoFinal.Modelo.TipoInmueble", b =>
+                {
+                    b.Navigation("Inmueble");
                 });
 #pragma warning restore 612, 618
         }

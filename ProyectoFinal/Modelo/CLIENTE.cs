@@ -28,6 +28,6 @@ namespace ProyectoFinal.Modelo
         public string? ClienteTelefono { get; set; }
 
         /*===============================================*/
-        public ICollection<Venta>? Ventas { get; set; }
+        //public ICollection<Venta>? Ventas { get; set; }
     }
 }
