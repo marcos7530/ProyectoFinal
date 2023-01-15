@@ -1,8 +1,8 @@
-﻿@page "/formasPagos"
+﻿@page "/formaPagoList"
 
 <h3>Formas de Pago</h3>
 <br />
-<a href="/formaPagoDetails"><i>Agregar nueva forma de pago</i></a>
+<a href="/formaPagoAdd"><i>Agregar nueva forma de pago</i></a>
 <br />
 
 @if (result!=null)
@@ -22,7 +22,7 @@
                     <tr>
                         <th>@formaPago.FormaPagoId</th>
                         <th>@formaPago.FormaPagoDesc</th>
-                        <th><a href="formaPagoDetails/@formaPago.FormaPagoId"><i>Editar</i></a></th>
+                        <th><a href="formaPagoUpdate/@formaPago.FormaPagoId"><i>Editar</i></a></th>
                         <th><a href="formaPagoDelete/@formaPago.FormaPagoId"><i>Eliminar</i></a></th>
                     </tr>
         }

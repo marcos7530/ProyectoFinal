@@ -1,8 +1,8 @@
-﻿@page "/inmuebles"
+﻿@page "/inmuebleList"
 
 <h3>Inmuebles</h3>
 <br />
-<a href="/inmuebleDetails"><i>Agregar nuevo inmueble</i></a>
+<a href="/inmuebleAdd"><i>Agregar nuevo inmueble</i></a>
 <br />
 
 @if (result != null)
@@ -24,7 +24,7 @@
             {
                 <tr>
                     <th>@inmueble.InmuebleId</th>
-                    <th>@inmueble.Tipo.TipoInmuebleDesc</th>
+                    <th>@inmueble.TipoInmuebleId</th>
                     <th>@inmueble.InmuebleDesc</th>
                     <th>@inmueble.InmuebleUbic</th>
                     <th>@inmueble.InmuebleCosto</th>

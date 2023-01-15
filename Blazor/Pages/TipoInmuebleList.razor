@@ -1,8 +1,8 @@
-﻿@page "/tiposInmuebles"
+﻿@page "/tipoInmuebleList"
 
 <h3>Tipos de Inmuebles</h3>
 <br />
-<a href="/tipoInmuebleDetails"><i>Agregar nuevo tipo de inmueble</i></a>
+<a href="/tipoInmuebleAdd"><i>Agregar nuevo tipo de inmueble</i></a>
 <br />
 
 @if (result != null)
@@ -16,18 +16,18 @@
                         <th></th>
                     </tr>
                 </thead>
-                <tbody>
+            <tbody>
             @foreach (ClienteSwagger.TipoInmueble tipoInmueble in result)
             {
-                            <tr>
-                            <th>@tipoInmueble.TipoInmuebleId</th>
-                            <th>@tipoInmueble.TipoInmuebleDesc</th>
-                    <th><a href="formaPagoDetails/@tipoInmueble.TipoInmuebleId"><i>Editar</i></a></th>
-                    <th><a href="formaPagoDelete/@tipoInmueble.TipoInmuebleId"><i>Eliminar</i></a></th>
-                            </tr>
+                <tr>
+                <th>@tipoInmueble.TipoInmuebleId</th>
+                <th>@tipoInmueble.TipoInmuebleDesc</th>
+                <th><a href="formaPagoDetails/@tipoInmueble.TipoInmuebleId"><i>Editar</i></a></th>
+                <th><a href="formaPagoDelete/@tipoInmueble.TipoInmuebleId"><i>Eliminar</i></a></th>
+                </tr>
             }
-                    </tbody>
-                </table>
+            </tbody>
+            </table>
 
 }
 else

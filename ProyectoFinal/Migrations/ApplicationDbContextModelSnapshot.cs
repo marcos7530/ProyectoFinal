@@ -26,7 +26,6 @@ namespace ProyectoFinal.Migrations
                 {
                     b.Property<int>("ClienteId")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(3)
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClienteId"));
@@ -56,7 +55,6 @@ namespace ProyectoFinal.Migrations
                 {
                     b.Property<int>("CondicionId")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(2)
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CondicionId"));
@@ -74,7 +72,6 @@ namespace ProyectoFinal.Migrations
                 {
                     b.Property<int>("FormaPagoId")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(2)
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FormaPagoId"));
@@ -92,13 +89,11 @@ namespace ProyectoFinal.Migrations
                 {
                     b.Property<int>("InmuebleId")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(3)
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InmuebleId"));
 
                     b.Property<int>("InmuebleCosto")
-                        .HasMaxLength(12)
                         .HasColumnType("int");
 
                     b.Property<string>("InmuebleDesc")
@@ -110,7 +105,6 @@ namespace ProyectoFinal.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<int>("TipoInmuebleId")
-                        .HasMaxLength(2)
                         .HasColumnType("int");
 
                     b.HasKey("InmuebleId");
@@ -122,7 +116,6 @@ namespace ProyectoFinal.Migrations
                 {
                     b.Property<int>("TipoInmuebleId")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(2)
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TipoInmuebleId"));
@@ -140,25 +133,20 @@ namespace ProyectoFinal.Migrations
                 {
                     b.Property<int>("VentaId")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(3)
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VentaId"));
 
                     b.Property<int?>("ClienteId")
-                        .HasMaxLength(2)
                         .HasColumnType("int");
 
                     b.Property<int?>("CondicionId")
-                        .HasMaxLength(2)
                         .HasColumnType("int");
 
                     b.Property<int?>("FormaPagoId")
-                        .HasMaxLength(2)
                         .HasColumnType("int");
 
                     b.Property<int?>("InmuebleId")
-                        .HasMaxLength(2)
                         .HasColumnType("int");
 
                     b.Property<string>("VentaDesc")
@@ -173,11 +161,9 @@ namespace ProyectoFinal.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("VentaTotalGeneral")
-                        .HasMaxLength(12)
                         .HasColumnType("int");
 
                     b.Property<int?>("VentaTotalIva")
-                        .HasMaxLength(8)
                         .HasColumnType("int");
 
                     b.HasKey("VentaId");

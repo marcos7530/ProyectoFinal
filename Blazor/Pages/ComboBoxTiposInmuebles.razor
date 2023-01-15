@@ -1,0 +1,26 @@
+﻿
+@using ClienteSwagger;
+
+<EditForm Model="@lista">
+<select class="custom-select" multiple>
+    <option value="0">Selecione Tipo</option>
+        @foreach (TipoInmueble tipo in lista)
+        {
+          <option value="@tipo.TipoInmuebleId">@tipo.TipoInmuebleDesc</option>
+        }
+</select>
+</EditForm>
+
+@code {
+    private ClienteSwagger client = new ClienteSwagger("https://localhost:7179/", new HttpClient());
+
+
+    private ICollection<TipoInmueble> lista { get; set; }
+
+    protected  async Task iniciar()
+    {
+        lista = await client.TipoInmuebleAllAsync();
+    }
+
+
+}

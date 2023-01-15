@@ -12,7 +12,7 @@ using ProyectoFinal.Context;
 namespace ProyectoFinal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230113195956_init")]
+    [Migration("20230115133822_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -29,7 +29,6 @@ namespace ProyectoFinal.Migrations
                 {
                     b.Property<int>("ClienteId")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(3)
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClienteId"));
@@ -59,7 +58,6 @@ namespace ProyectoFinal.Migrations
                 {
                     b.Property<int>("CondicionId")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(2)
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CondicionId"));
@@ -77,7 +75,6 @@ namespace ProyectoFinal.Migrations
                 {
                     b.Property<int>("FormaPagoId")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(2)
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FormaPagoId"));
@@ -95,13 +92,11 @@ namespace ProyectoFinal.Migrations
                 {
                     b.Property<int>("InmuebleId")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(3)
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InmuebleId"));
 
                     b.Property<int>("InmuebleCosto")
-                        .HasMaxLength(12)
                         .HasColumnType("int");
 
                     b.Property<string>("InmuebleDesc")
@@ -113,12 +108,9 @@ namespace ProyectoFinal.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<int>("TipoInmuebleId")
-                        .HasMaxLength(2)
                         .HasColumnType("int");
 
                     b.HasKey("InmuebleId");
-
-                    b.HasIndex("TipoInmuebleId");
 
                     b.ToTable("Inmuebles");
                 });
@@ -127,7 +119,6 @@ namespace ProyectoFinal.Migrations
                 {
                     b.Property<int>("TipoInmuebleId")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(2)
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TipoInmuebleId"));
@@ -145,25 +136,20 @@ namespace ProyectoFinal.Migrations
                 {
                     b.Property<int>("VentaId")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(3)
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VentaId"));
 
                     b.Property<int?>("ClienteId")
-                        .HasMaxLength(2)
                         .HasColumnType("int");
 
                     b.Property<int?>("CondicionId")
-                        .HasMaxLength(2)
                         .HasColumnType("int");
 
                     b.Property<int?>("FormaPagoId")
-                        .HasMaxLength(2)
                         .HasColumnType("int");
 
                     b.Property<int?>("InmuebleId")
-                        .HasMaxLength(2)
                         .HasColumnType("int");
 
                     b.Property<string>("VentaDesc")
@@ -178,89 +164,14 @@ namespace ProyectoFinal.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("VentaTotalGeneral")
-                        .HasMaxLength(12)
                         .HasColumnType("int");
 
                     b.Property<int?>("VentaTotalIva")
-                        .HasMaxLength(8)
                         .HasColumnType("int");
 
                     b.HasKey("VentaId");
 
-                    b.HasIndex("ClienteId");
-
-                    b.HasIndex("CondicionId");
-
-                    b.HasIndex("FormaPagoId");
-
-                    b.HasIndex("InmuebleId")
-                        .IsUnique()
-                        .HasFilter("[InmuebleId] IS NOT NULL");
-
                     b.ToTable("Ventas");
-                });
-
-            modelBuilder.Entity("ProyectoFinal.Modelo.Inmueble", b =>
-                {
-                    b.HasOne("ProyectoFinal.Modelo.TipoInmueble", "Tipo")
-                        .WithMany("Inmueble")
-                        .HasForeignKey("TipoInmuebleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Tipo");
-                });
-
-            modelBuilder.Entity("ProyectoFinal.Modelo.Venta", b =>
-                {
-                    b.HasOne("ProyectoFinal.Modelo.Cliente", "Cliente")
-                        .WithMany("Ventas")
-                        .HasForeignKey("ClienteId");
-
-                    b.HasOne("ProyectoFinal.Modelo.Condicion", "Condicion")
-                        .WithMany("Ventas")
-                        .HasForeignKey("CondicionId");
-
-                    b.HasOne("ProyectoFinal.Modelo.FormaPago", "FormaPago")
-                        .WithMany("Ventas")
-                        .HasForeignKey("FormaPagoId");
-
-                    b.HasOne("ProyectoFinal.Modelo.Inmueble", "Inmueble")
-                        .WithOne("Ventas")
-                        .HasForeignKey("ProyectoFinal.Modelo.Venta", "InmuebleId");
-
-                    b.Navigation("Cliente");
-
-                    b.Navigation("Condicion");
-
-                    b.Navigation("FormaPago");
-
-                    b.Navigation("Inmueble");
-                });
-
-            modelBuilder.Entity("ProyectoFinal.Modelo.Cliente", b =>
-                {
-                    b.Navigation("Ventas");
-                });
-
-            modelBuilder.Entity("ProyectoFinal.Modelo.Condicion", b =>
-                {
-                    b.Navigation("Ventas");
-                });
-
-            modelBuilder.Entity("ProyectoFinal.Modelo.FormaPago", b =>
-                {
-                    b.Navigation("Ventas");
-                });
-
-            modelBuilder.Entity("ProyectoFinal.Modelo.Inmueble", b =>
-                {
-                    b.Navigation("Ventas");
-                });
-
-            modelBuilder.Entity("ProyectoFinal.Modelo.TipoInmueble", b =>
-                {
-                    b.Navigation("Inmueble");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,8 +1,8 @@
-﻿@page "/ventas"
+﻿@page "/ventaList"
 
 <h3>Ventas</h3>
 <br />
-<a href="/ventaDetails"><i>Nueva venta</i></a>
+<a href="/ventaAdd"><i>Nueva venta</i></a>
 <br />
 
 @if (result != null)
@@ -29,10 +29,10 @@
             {
                 <tr>
                     <th>@venta.VentaId</th>
-                    @*<th>@venta.Inmueble.InmuebleDesc</th>
-                    <th>@venta.Cliente.ClienteNombre</th>
-                    <th>@venta.Condicion.CondicionDesc</th>
-                    <th>@venta.FormaPago.FormaPagoDesc</th>*@
+                    <th>@venta.InmuebleId</th>
+                    <th>@venta.ClienteId</th>
+                    <th>@venta.CondicionId</th>
+                    <th>@venta.FormaPagoId</th>
                     <th>@venta.VentaDesc</th>
                     <th>@venta.VentaTotal</th>
                     <th>@venta.VentaTotalIva</th>

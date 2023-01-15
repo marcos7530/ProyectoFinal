@@ -4,8 +4,8 @@ namespace ProyectoFinal.Modelo
 {
     public class Cliente
     {
-        [Key,MaxLength(3, ErrorMessage = 
-            "El id supera la cantidad maxima de {0} digitos")]
+        [Key]/*,MaxLength(3, ErrorMessage = 
+            "El id supera la cantidad maxima de {0} digitos")*/
         public int ClienteId { get; set; }
 
         [MaxLength(50, ErrorMessage = 
