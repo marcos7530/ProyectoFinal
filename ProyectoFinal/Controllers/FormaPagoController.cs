@@ -27,28 +27,29 @@ namespace ProyectoFinal.Controllers
 
         [HttpGet("{id}")]
         public async Task<ActionResult<FormaPago>> GetByIdAsync(int id)
-        { 
-         var formaPago=await _servicio.GetByIdAsync(id);
+        {
+            var formaPago = await _servicio.GetByIdAsync(id);
 
-            if (formaPago==null)
+            if (formaPago == null)
             {
                 return NotFound();
             }
-        return Ok(formaPago);
+            return Ok(formaPago);
         }
 
         [HttpPost]
+        [ActionName(nameof(GetByIdAsync))]
         public async Task<ActionResult<FormaPago>> AddAsync(FormaPago formaPago)
-        { 
-        
-        await _servicio.AddAsync(formaPago);
+        {
+
+            await _servicio.AddAsync(formaPago);
             return CreatedAtAction(nameof(GetByIdAsync), new { id = formaPago.FormaPagoId }, formaPago);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAsync(int id, FormaPago formaPago)
         {
-            if (id!=formaPago.FormaPagoId)
+            if (id != formaPago.FormaPagoId)
             {
                 return BadRequest();
             }
@@ -59,7 +60,7 @@ namespace ProyectoFinal.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(int id) 
+        public async Task<IActionResult> DeleteAsync(int id)
         {
             await _servicio.DeleteAsync(id);
             return NoContent();
