@@ -1,0 +1,69 @@
+﻿@page "/inmuebleDelete/{id:int}"
+
+@using ClienteSwagger;
+@inject NavigationManager NavigatioManager
+
+
+<EditForm Model="@inmueble">
+    <table class="form-control" style="text-align:center">
+        <tr>
+            @*<ComboBoxTiposInmuebles></ComboBoxTiposInmuebles>*@
+            <td>Tipo:</td>
+            <td><input class="form-control col-sm-4" type="number" @bind="inmueble.TipoInmuebleId" /></td>
+            <br>
+        </tr>
+        <tr>
+            <td>Descripcion:</td>
+            <td><input class="form-control col-sm-4" type="text" @bind="inmueble.InmuebleDesc" /></td>
+            <br>
+        </tr>
+        <tr>
+            <td>Ubicacion:</td>
+            <td><input class="form-control col-sm-4" type="text" @bind="inmueble.InmuebleUbic" /></td>
+            <br>
+        </tr>
+        <tr>
+            <td>Costo:</td>
+            <td><input class="form-control col-sm-4" type="number" @bind="inmueble.InmuebleCosto" /></td>
+            <br>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align:center">
+                <input type="submit" value="Delete" @onclick="Delete" />
+                <input type="button" value="Cancel" @onclick="Cancel" />
+            </td>
+        </tr>
+    </table>
+</EditForm>
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+
+    private Inmueble inmueble = new Inmueble();
+
+    private ClienteSwagger client = new ClienteSwagger("https://localhost:7179/", new HttpClient());
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (id != 0)
+        {
+            inmueble = await client.InmuebleGETAsync(id);
+        }
+    }
+
+    protected async Task Delete()
+    {
+        await client.InmuebleDELETEAsync(id);
+        Cancel();
+    }
+
+    protected void Cancel()
+    {
+        NavigatioManager.NavigateTo("/inmuebleList");
+    }
+
+
+
+
+}

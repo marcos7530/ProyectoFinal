@@ -25,13 +25,13 @@ namespace ProyectoFinal.Modelo
         [ForeignKey("FormaPago")]/*, MaxLength(2, ErrorMessage = 
             "El id supera la cantidad maxima de {0} digitos.")*/
         public int? FormaPagoId { get; set; }
-        
+
         [MaxLength(255, ErrorMessage =
             "La descripcion no puede superar los {0} caracteres.")]
         public string? VentaDesc { get; set; }
 
-        [MaxLength(10, ErrorMessage = 
-            "El total de la venta no puede superar los {0} digitos.")]
+        //[MaxLength(10, ErrorMessage = 
+        //    "El total de la venta no puede superar los {0} digitos.")]
         public int? VentaTotal { get; set; }
         
         //[MaxLength(8, ErrorMessage = 

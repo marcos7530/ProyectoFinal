@@ -2,7 +2,7 @@
 
 <h3>Clientes</h3>
 <br />
-<a href="/clienteDetails"><i>Agregar nuevo Cliente</i></a>
+<a href="/clienteAdd"><i>Agregar nuevo Cliente</i></a>
 <br />
 
 @if (result != null)
@@ -30,8 +30,8 @@
                             <th>@cliente.ClienteTelefono</th>
                             <th></th>
                             <th></th>
-                            <th><a href="formaPagoDetails/@cliente.ClienteId"><i>Editar</i></a></th>
-                            <th><a href="formaPagoDelete/@cliente.ClienteId"><i>Eliminar</i></a></th>
+                            <th><a href="clienteUpdate/@cliente.ClienteId"><i>Editar</i></a></th>
+                            <th><a href="clienteDelete/@cliente.ClienteId"><i>Eliminar</i></a></th>
                             </tr>
             }
                     </tbody>

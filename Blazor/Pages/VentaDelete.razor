@@ -1,4 +1,4 @@
-﻿@page "/ventaAdd"
+﻿@page "/ventaDelete/{id:int}"
 
 @using ClienteSwagger;
 @inject NavigationManager NavigatioManager
@@ -50,12 +50,12 @@
         <tr>
             <td>Fecha Venta:</td>
             <td><input class="form-control col-sm-3" type="date" @bind="venta.VentaFecha" /></td>
-            @*<td><input class="form-control col-sm-3" type="date" @bind="venta.VentaFecha"></td>*@
+            @*<td><input class="form-control col-sm-3" type="datetime" min="0001-01-01" @bind="venta.VentaFecha"></td>*@
             <br>
         </tr>
         <tr>
             <td colspan="3" style="text-align:center">
-                <input type="submit" value="Save" @onclick="SaveProduct" />
+                <input type="submit" value="Delete" @onclick="Delete" />
                 <input type="button" value="Cancel" @onclick="Cancel" />
             </td>
         </tr>
@@ -67,15 +67,29 @@
 
 @code {
 
-    private Venta venta = new Venta();
+    [Parameter]
+    public int id { get; set; }
 
     private DateTime fecha = DateTime.Now;
+    
+
+    private Venta venta = new Venta();
+
+    
 
     private ClienteSwagger client = new ClienteSwagger("https://localhost:7179/", new HttpClient());
 
-    protected async Task SaveProduct()
+    protected override async Task OnInitializedAsync()
     {
-        await client.VentaPOSTAsync(venta);
+        if (id!=0)
+        {
+            venta = await client.VentaGETAsync(id);
+        }
+    }
+
+    protected async Task Delete()
+    {
+        await client.VentaDELETEAsync(id);
         Cancel();
     }
 
@@ -84,3 +98,4 @@
         NavigatioManager.NavigateTo("/ventaList");
     }
 }
+

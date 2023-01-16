@@ -2,7 +2,7 @@
 
 <h3>Condiciones</h3>
 <br />
-<a href="/condicionDetails"><i>Agregar nueva Condicion</i></a>
+<a href="/condicionAdd"><i>Agregar nueva Condicion</i></a>
 <br />
 
 @if (result != null)
@@ -22,8 +22,8 @@
                     <tr>
                     <th>@condicion.CondicionId</th>
                     <th>@condicion.CondicionDesc</th>
-                    <th><a href="formaPagoDetails/@condicion.CondicionId"><i>Editar</i></a></th>
-                    <th><a href="formaPagoDelete/@condicion.CondicionId"><i>Eliminar</i></a></th>
+                    <th><a href="condicionUpdate/@condicion.CondicionId"><i>Editar</i></a></th>
+                    <th><a href="condicionDelete/@condicion.CondicionId"><i>Eliminar</i></a></th>
                     </tr>
             }
             </tbody>
