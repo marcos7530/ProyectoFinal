@@ -1,13 +1,14 @@
-﻿@page "/formaPagoUpdate/{id:int}"
+﻿@page "/tipoInmuebleUpdate/{id:int}"
+
 @using ClienteSwagger;
 @inject NavigationManager NavigatioManager
 
 
-<EditForm Model="@formaPago">
+<EditForm Model="@tipoInmueble">
     <table class="table">
         <tr>
             <td>Descripcion:</td>
-            <td><input class="form-control col-sm-4" type="text" @bind="formaPago.FormaPagoDesc" /></td>
+            <td><input class="form-control col-sm-4" type="text" @bind="tipoInmueble.TipoInmuebleDesc" /></td>
         </tr>
         <tr>
             <td colspan="2" style="text-align:center">
@@ -22,28 +23,30 @@
 
 
 @code {
+
     [Parameter]
     public int id { get; set; }
 
-    private FormaPago formaPago = new FormaPago();
     private ClienteSwagger client = new ClienteSwagger("https://localhost:7179/", new HttpClient());
+    private TipoInmueble tipoInmueble = new TipoInmueble();
+
 
     protected override async Task OnInitializedAsync()
     {
         if (id!=0)
         {
-        formaPago = await client.FormaPagoGETAsync(id);    
+            tipoInmueble = await client.TipoInmuebleGETAsync(id);
         }
     }
 
     protected async Task Update()
     {
-        await client.FormaPagoPUTAsync(id,formaPago);
-        NavigatioManager.NavigateTo("/formaPagoList");
+        await client.TipoInmueblePUTAsync(id,tipoInmueble);
+        Cancel();
     }
 
     protected void Cancel()
     {
-        NavigatioManager.NavigateTo("/formaPagoList");
+        NavigatioManager.NavigateTo("/tipoInmuebleList");
     }
 }

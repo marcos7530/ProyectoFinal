@@ -1,0 +1,101 @@
+﻿@page "/ventaUpdate/{id:int}"
+
+@using ClienteSwagger;
+@inject NavigationManager NavigatioManager
+
+
+<EditForm Model="@venta">
+    <table class="form-control col-3" style="text-align:center">
+        <tr>
+            @*<ComboBoxTiposInmuebles></ComboBoxTiposInmuebles>*@
+            <td>Inmueble:</td>
+            <td><input class="form-control col-sm-3" type="number" @bind="venta.InmuebleId" /></td>
+            <br>
+        </tr>
+        <tr>
+            <td>Cliente:</td>
+            <td><input class="form-control col-sm-3" type="number" @bind="venta.ClienteId" /></td>
+            <br>
+        </tr>
+        <tr>
+            <td>Condicion:</td>
+            <td><input class="form-control col-sm-3" type="number" @bind="venta.CondicionId" /></td>
+            <br>
+        </tr>
+        <tr>
+            <td>FormaPago:</td>
+            <td><input class="form-control col-sm-3" type="number" @bind="venta.FormaPagoId" /></td>
+            <br>
+        </tr>
+        <tr>
+            <td>Descripcion:</td>
+            <td><input class="form-control col-sm-3" type="text" @bind="venta.VentaDesc" /></td>
+            <br>
+        </tr>
+        <tr>
+            <td>Total Venta:</td>
+            <td><input class="form-control col-sm-3" type="number" @bind="venta.VentaTotal" /></td>
+            <br>
+        </tr>
+        <tr>
+            <td>Total IVA:</td>
+            <td><input class="form-control col-sm-3" type="number" @bind="venta.VentaTotalIva" /></td>
+            <br>
+        </tr>
+        <tr>
+            <td>Total General:</td>
+            <td><input class="form-control col-sm-3" type="number" @bind="venta.VentaTotalGeneral" /></td>
+            <br>
+        </tr>
+        <tr>
+            <td>Fecha Venta:</td>
+            <td><input class="form-control col-sm-3" type="date" @bind="venta.VentaFecha" /></td>
+            @*<td><input class="form-control col-sm-3" type="datetime" min="0001-01-01" @bind="venta.VentaFecha"></td>*@
+            <br>
+        </tr>
+        <tr>
+            <td colspan="3" style="text-align:center">
+                <input type="submit" value="Update" @onclick="Update" />
+                <input type="button" value="Cancel" @onclick="Cancel" />
+            </td>
+        </tr>
+    </table>
+</EditForm>
+
+
+
+
+@code {
+
+    [Parameter]
+    public int id { get; set; }
+
+    private DateTime fecha = DateTime.Now;
+    
+
+    private Venta venta = new Venta();
+
+    
+
+    private ClienteSwagger client = new ClienteSwagger("https://localhost:7179/", new HttpClient());
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (id!=0)
+        {
+            venta = await client.VentaGETAsync(id);
+        }
+    }
+
+    protected async Task Update()
+    {
+        await client.VentaPUTAsync(id, venta);
+        Cancel();
+    }
+
+    protected void Cancel()
+    {
+        NavigatioManager.NavigateTo("/ventaList");
+    }
+}
+

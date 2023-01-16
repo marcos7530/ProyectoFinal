@@ -1,13 +1,13 @@
-﻿@page "/formaPagoUpdate/{id:int}"
+﻿@page "/condicionUpdate/{id:int}"
 @using ClienteSwagger;
 @inject NavigationManager NavigatioManager
 
 
-<EditForm Model="@formaPago">
-    <table class="table">
+<EditForm Model="@condicion">
+    <table class="form-control-lg">
         <tr>
             <td>Descripcion:</td>
-            <td><input class="form-control col-sm-4" type="text" @bind="formaPago.FormaPagoDesc" /></td>
+            <td><input class="form-control col-sm-4" type="text" @bind="condicion.CondicionDesc" /></td>
         </tr>
         <tr>
             <td colspan="2" style="text-align:center">
@@ -25,25 +25,26 @@
     [Parameter]
     public int id { get; set; }
 
-    private FormaPago formaPago = new FormaPago();
+    private Condicion condicion = new Condicion();
     private ClienteSwagger client = new ClienteSwagger("https://localhost:7179/", new HttpClient());
+
 
     protected override async Task OnInitializedAsync()
     {
         if (id!=0)
         {
-        formaPago = await client.FormaPagoGETAsync(id);    
+            condicion = await client.CondicionGETAsync(id);
         }
     }
 
     protected async Task Update()
     {
-        await client.FormaPagoPUTAsync(id,formaPago);
-        NavigatioManager.NavigateTo("/formaPagoList");
+        await client.CondicionPUTAsync(condicion.CondicionId, condicion);
+        Cancel();
     }
 
     protected void Cancel()
     {
-        NavigatioManager.NavigateTo("/formaPagoList");
+        NavigatioManager.NavigateTo("/condicionList");
     }
 }
