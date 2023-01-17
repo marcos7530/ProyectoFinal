@@ -2,13 +2,13 @@
 
 <h3>Tipos de Inmuebles</h3>
 <br />
-<a href="/tipoInmuebleAdd"><i>Agregar nuevo tipo de inmueble</i></a>
+<a href="/tipoInmuebleAdd" role="button" class="btn btn-success">Agregar</a>
 <br />
 
 @if (result != null)
 {
-            <table class="table">
-                <thead>
+    <table class="table table-striped">
+        <thead class="thead-dark">
                     <tr>
                         <th>Id</th>
                         <th>Descripcion</th>
@@ -22,8 +22,11 @@
                 <tr>
                 <th>@tipoInmueble.TipoInmuebleId</th>
                 <th>@tipoInmueble.TipoInmuebleDesc</th>
-                    <th><a href="tipoInmuebleUpdate/@tipoInmueble.TipoInmuebleId"><i>Editar</i></a></th>
-                    <th><a href="tipoInmuebleDelete/@tipoInmueble.TipoInmuebleId"><i>Eliminar</i></a></th>
+                    <th><a href="tipoInmuebleUpdate/@tipoInmueble.TipoInmuebleId" role="button" class="btn btn-primary">Editar</a></th>
+                    <th><a href="tipoInmuebleDelete/@tipoInmueble.TipoInmuebleId" role="button" class="btn btn-danger">Eliminar</a></th>
+                    
+                    @*<th><a href="tipoInmuebleUpdate/@tipoInmueble.TipoInmuebleId"><i>Editar</i></a></th>
+                    <th><a href="tipoInmuebleDelete/@tipoInmueble.TipoInmuebleId"><i>Eliminar</i></a></th>*@
                 </tr>
             }
             </tbody>

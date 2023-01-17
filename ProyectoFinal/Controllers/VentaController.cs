@@ -42,7 +42,9 @@ namespace ProyectoFinal.Controllers
         {
 
             await _servicio.AddAsync(venta);
-            return CreatedAtAction(nameof(GetByIdAsync), new { id = venta.VentaId }, venta);
+            //return CreatedAtAction(nameof(GetByIdAsync), new { id = venta.VentaId }, venta);
+
+            return Ok(venta);
         }
 
         [HttpPut("{id}")]
@@ -55,14 +57,16 @@ namespace ProyectoFinal.Controllers
 
             await _servicio.UpdateAsync(venta);
 
-            return NoContent();
+            //return NoContent();
+            return Ok();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
             await _servicio.DeleteAsync(id);
-            return NoContent();
+            //return NoContent();
+            return Ok();
         }
 
 

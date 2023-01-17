@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Azure;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Build.Tasks.Deployment.Bootstrapper;
 using ProyectoFinal.Modelo;
+using Swashbuckle.Swagger.Annotations;
 
 namespace ProyectoFinal.Controllers
 {
@@ -38,12 +41,11 @@ namespace ProyectoFinal.Controllers
         }
 
         [HttpPost]
-        [ActionName(nameof(GetByIdAsync))]
         public async Task<ActionResult<FormaPago>> AddAsync(FormaPago formaPago)
         {
-
             await _servicio.AddAsync(formaPago);
-            return CreatedAtAction(nameof(GetByIdAsync), new { id = formaPago.FormaPagoId }, formaPago);
+            //return CreatedAtAction(nameof(GetByIdAsync), new { id = formaPago.FormaPagoId }, formaPago);
+            return Ok(formaPago);
         }
 
         [HttpPut("{id}")]
@@ -56,14 +58,16 @@ namespace ProyectoFinal.Controllers
 
             await _servicio.UpdateAsync(formaPago);
 
-            return NoContent();
+            //return NoContent();
+            return Ok();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
             await _servicio.DeleteAsync(id);
-            return NoContent();
+            //return NoContent();
+            return Ok();
         }
 
     }

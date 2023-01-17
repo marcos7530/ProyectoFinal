@@ -43,7 +43,9 @@ namespace ProyectoFinal.Controllers
         {
 
             await _servicio.AddAsync(cliente);
-            return CreatedAtAction(nameof(GetByIdAsync), new { id = cliente.ClienteId }, cliente);
+           // return CreatedAtAction(nameof(GetByIdAsync), new { id = cliente.ClienteId }, cliente);
+
+            return Ok(cliente);
         }
 
         [HttpPut("{id}")]

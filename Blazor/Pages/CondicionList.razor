@@ -2,13 +2,13 @@
 
 <h3>Condiciones</h3>
 <br />
-<a href="/condicionAdd"><i>Agregar nueva Condicion</i></a>
+<a href="/condicionAdd" role="button" class="btn btn-success">Agregar</a>
 <br />
 
 @if (result != null)
 {
-        <table class="table">
-            <thead>
+    <table class="table table-striped ">
+        <thead class="thead-dark">
                 <tr>
                     <th>Id</th>
                     <th>Descripcion</th>
@@ -22,8 +22,11 @@
                     <tr>
                     <th>@condicion.CondicionId</th>
                     <th>@condicion.CondicionDesc</th>
+                    <th><a href="condicionUpdate/@condicion.CondicionId" role="button" class="btn btn-primary">Editar</a></th>
+                    <th><a href="condicionDelete/@condicion.CondicionId" role="button" class="btn btn-danger">Eliminar</a></th>
+@*
                     <th><a href="condicionUpdate/@condicion.CondicionId"><i>Editar</i></a></th>
-                    <th><a href="condicionDelete/@condicion.CondicionId"><i>Eliminar</i></a></th>
+                    <th><a href="condicionDelete/@condicion.CondicionId"><i>Eliminar</i></a></th>*@
                     </tr>
             }
             </tbody>

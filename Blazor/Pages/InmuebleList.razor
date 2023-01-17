@@ -2,13 +2,13 @@
 
 <h3>Inmuebles</h3>
 <br />
-<a href="/inmuebleAdd"><i>Agregar nuevo inmueble</i></a>
+<a href="/inmuebleAdd" role="button" class="btn btn-success">Agregar</a>
 <br />
 
 @if (result != null)
 {
-    <table class="table">
-        <thead>
+    <table class="table table-striped">
+        <thead class="thead-dark">
             <tr>
                 <th>Id</th>
                 <th>Tipo</th>
@@ -28,8 +28,11 @@
                     <th>@inmueble.InmuebleDesc</th>
                     <th>@inmueble.InmuebleUbic</th>
                     <th>@inmueble.InmuebleCosto</th>
-                    <th><a href="inmuebleUpdate/@inmueble.InmuebleId"><i>Editar</i></a></th>
-                    <th><a href="inmuebleDelete/@inmueble.InmuebleId"><i>Eliminar</i></a></th>
+                    <th><a href="inmuebleUpdate/@inmueble.InmuebleId" role="button" class="btn btn-primary">Editar</a></th>
+                    <th><a href="inmuebleDelete/@inmueble.InmuebleId" role="button" class="btn btn-danger">Eliminar</a></th>
+
+                   @* <th><a href="inmuebleUpdate/@inmueble.InmuebleId"><i>Editar</i></a></th>
+                    <th><a href="inmuebleDelete/@inmueble.InmuebleId"><i>Eliminar</i></a></th>*@
                 </tr>
             }
         </tbody>

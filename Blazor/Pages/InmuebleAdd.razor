@@ -5,7 +5,7 @@
 
 
 <EditForm Model="@inmueble">
-    <table class="form-control" style="text-align:center">
+    <table class="form-control " style="text-align:center">
         <tr>
             @*<ComboBoxTiposInmuebles></ComboBoxTiposInmuebles>*@
             <td>Tipo:</td>
@@ -48,7 +48,7 @@
     protected async Task SaveProduct()
     {
         await client.InmueblePOSTAsync(inmueble);
-        //Cancel();
+        Cancel();
     }
 
     protected void Cancel()
