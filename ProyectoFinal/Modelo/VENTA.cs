@@ -32,15 +32,15 @@ namespace ProyectoFinal.Modelo
 
         //[MaxLength(10, ErrorMessage = 
         //    "El total de la venta no puede superar los {0} digitos.")]
-        public int? VentaTotal { get; set; }
+        public decimal? VentaTotal { get; set; }
         
         //[MaxLength(8, ErrorMessage = 
         //    "El total del iva no puede superar los {0} digitos.")]
-        public int? VentaTotalIva { get; set; }
+        public decimal? VentaTotalIva { get; set; }
 
         //[MaxLength(12, ErrorMessage = 
         //    "El total general no puede superar los {0} digitos.")]
-        public int? VentaTotalGeneral { get; set; }
+        public decimal? VentaTotalGeneral { get; set; }
 
         public DateTime? VentaFecha { get; set; }//
 

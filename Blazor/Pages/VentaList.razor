@@ -1,5 +1,15 @@
 ﻿@page "/ventaList"
 
+@*<style>
+    body {
+        background-image: url(https://img.freepik.com/fotos-premium/fondo-textura-pared-ladrillo-blanco-moderno_35257-348.jpg?w=2000);
+        background-size: cover;
+    }
+
+    table{}
+</style>*@
+
+
 <h3>Ventas</h3>
 <br />
 <a href="/ventaAdd" role="button" class="btn btn-success">Agregar</a>
@@ -29,10 +39,10 @@
             {
                 <tr>
                     <th>@venta.VentaId</th>
-                    <th>@venta.InmuebleId</th>
-                    <th>@venta.ClienteId</th>
-                    <th>@venta.CondicionId</th>
-                    <th>@venta.FormaPagoId</th>
+                    <th>@inmuebles.Where(x=>x.InmuebleId==venta.InmuebleId).FirstOrDefault().InmuebleUbic</th>
+                    <th>@clientes.Where(x=>x.ClienteId==venta.ClienteId).FirstOrDefault().ClienteNombre</th>
+                    <th>@condiciones.Where(x=>x.CondicionId==venta.CondicionId).FirstOrDefault().CondicionDesc</th>
+                    <th>@formasPagos.Where(x=>x.FormaPagoId==venta.FormaPagoId).FirstOrDefault().FormaPagoDesc</th>
                     <th>@venta.VentaDesc</th>
                     <th>@venta.VentaTotal</th>
                     <th>@venta.VentaTotalIva</th>
@@ -57,12 +67,27 @@ else
 @code {
 
     private ICollection<ClienteSwagger.Venta> result;
+    private ICollection<ClienteSwagger.Inmueble> inmuebles;
+    private ICollection<ClienteSwagger.Cliente> clientes;
+    private ICollection<ClienteSwagger.Condicion> condiciones;
+    private ICollection<ClienteSwagger.FormaPago> formasPagos;
 
     private ClienteSwagger.ClienteSwagger client = new ClienteSwagger.ClienteSwagger("https://localhost:7179/", new HttpClient());
 
     private async Task Refresh()
     {
         result = await client.VentaAllAsync();
+
+        inmuebles = await client.InmuebleAllAsync();
+
+        clientes = await client.ClienteAllAsync();
+
+        condiciones = await client.CondicionAllAsync();
+
+        formasPagos = await client.FormaPagoAllAsync();
+
+
+
     }
 
     protected override async Task OnInitializedAsync()

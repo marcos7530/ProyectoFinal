@@ -19,7 +19,7 @@ namespace ProyectoFinal.Modelo
         public string? InmuebleUbic { get; set; }
               
         //[MaxLength(12, ErrorMessage ="El costo del inmueble no puede ser mayor a {0} digitos.")]
-        public int InmuebleCosto { get; set; }
+        public decimal InmuebleCosto { get; set; }
 
 
         /*===============================================*/

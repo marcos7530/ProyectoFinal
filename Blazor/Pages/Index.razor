@@ -1,5 +1,5 @@
 ﻿@page "/"
-@using ClienteSwagger
+@*@using ClienteSwagger
 
 <select class="form-select">
     @if (listaTiposInmueble != null)
@@ -119,41 +119,10 @@
         await Task.Delay(1000);
     }
 }
-
-
-
-@*<iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d56959.19801057027!2d-65.24213784667967!3d-26.841546527224295!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2sar!4v1673992448709!5m2!1ses!2sar" 
-width="1600" height="900" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>*@
-
-
-
-@*<PageTitle>Index</PageTitle>
-
-@if (result!=null)
-{
-    @foreach (ClienteSwagger.TipoInmueble tipoInmueble in result)
-    {
-    <div>
-        @tipoInmueble.TipoInmuebleId -
-        @tipoInmueble.TipoInmuebleDesc
-    </div>    
-    
-    }
-}
-
-
-@code{
-    private ICollection<ClienteSwagger.TipoInmueble> result;
-    private ClienteSwagger.ClienteSwagger client = new ClienteSwagger.ClienteSwagger("https://localhost:7179/", new HttpClient());
-
-    private async Task Refresh()
-    {
-        result = await client.TipoInmuebleAllAsync();
-    }
-
-    protected override async Task OnInitializedAsync()
-    {
-        await Refresh();
-    }
-}
 *@
+
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d56959.19801057027!2d-65.24213784667967!3d-26.841546527224295!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2sar!4v1673992448709!5m2!1ses!2sar" 
+width="1090" height="580" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+

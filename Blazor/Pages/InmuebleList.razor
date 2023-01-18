@@ -1,5 +1,13 @@
 ﻿@page "/inmuebleList"
 
+@*<style>
+    body {
+        background-image: url(https://img.freepik.com/fotos-premium/fondo-textura-pared-ladrillo-blanco-moderno_35257-348.jpg?w=2000);
+        background-size: cover;
+
+    }
+</style>*@
+
 <h3>Inmuebles</h3>
 <br />
 <a href="/inmuebleAdd" role="button" class="btn btn-success">Agregar</a>
@@ -24,7 +32,8 @@
             {
                 <tr>
                     <th>@inmueble.InmuebleId</th>
-                    <th>@inmueble.TipoInmuebleId</th>
+                    <th>@tipos.Where(x=>x.TipoInmuebleId==inmueble.TipoInmuebleId).FirstOrDefault().TipoInmuebleDesc</th>
+                    @*<th>@inmueble.TipoInmuebleId</th>*@
                     <th>@inmueble.InmuebleDesc</th>
                     <th>@inmueble.InmuebleUbic</th>
                     <th>@inmueble.InmuebleCosto</th>
@@ -48,12 +57,17 @@ else
 @code {
 
     private ICollection<ClienteSwagger.Inmueble> result;
+    private ICollection<ClienteSwagger.TipoInmueble> tipos;
 
     private ClienteSwagger.ClienteSwagger client = new ClienteSwagger.ClienteSwagger("https://localhost:7179/", new HttpClient());
 
     private async Task Refresh()
     {
         result = await client.InmuebleAllAsync();
+
+        tipos = await client.TipoInmuebleAllAsync();
+
+        //tipo
     }
 
     protected override async Task OnInitializedAsync()

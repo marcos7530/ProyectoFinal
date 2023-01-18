@@ -12,7 +12,8 @@
     }
 
     body {
-        background-image: url(https://www.bbva.com/wp-content/uploads/2021/04/casas-ecolo%CC%81gicas_apertura-hogar-sostenibilidad-certificado-.jpg) 
+        background-image: url(https://img.freepik.com/foto-gratis/familia-moviendose-usando-cajas_1157-35481.jpg?w=2000);
+        background-size: cover;
     }
 </style>
 
@@ -74,7 +75,7 @@
     protected async Task SaveProduct()
     {
         await client.ClientePOSTAsync(cliente);
-        //Cancel();
+        Cancel();
     }
 
     protected void Cancel()
