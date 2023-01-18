@@ -1,0 +1,71 @@
+﻿@page "/clienteUpdate/{id:int}"
+
+@using ClienteSwagger;
+@inject NavigationManager NavigatioManager
+
+
+<EditForm Model="@cliente">
+    <table class="form-control col-3" style="text-align:center">
+        <tr>
+            @*<ComboBoxTiposInmuebles></ComboBoxTiposInmuebles>*@
+            <td>Nombre:</td>
+            <td><input class="form-control col-sm-3" type="text" @bind="cliente.ClienteNombre" /></td>
+            <br>
+        </tr>
+        <tr>
+            <td>Direccion:</td>
+            <td><input class="form-control col-sm-3" type="text" @bind="cliente.CleinteDireccion" /></td>
+            <br>
+        </tr>
+        <tr>
+            <td>Correo:</td>
+            <td><input class="form-control col-sm-3" type="text" @bind="cliente.ClienteCorreo" /></td>
+            <br>
+        </tr>
+        <tr>
+            <td>Telefono:</td>
+            <td><input class="form-control col-sm-3" type="tel" @bind="cliente.ClienteTelefono" /></td>
+            <br>
+        </tr>
+        <tr>
+            <td colspan="3" style="text-align:center">
+                <input type="submit" value="Update" @onclick="Update" />
+                <input type="button" value="Cancel" @onclick="Cancel" />
+            </td>
+        </tr>
+    </table>
+</EditForm>
+
+
+
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+
+
+    private Cliente cliente = new Cliente();
+
+    private ClienteSwagger client = new ClienteSwagger("https://localhost:7179/", new HttpClient());
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (id!=0)
+        {
+            cliente = await client.ClienteGETAsync(id);
+        }
+    }
+
+
+    protected async Task Update()
+    {
+        await client.ClientePUTAsync(id,cliente);
+        id = 0;
+        NavigatioManager.NavigateTo("/clienteList");
+    }
+
+    protected void Cancel()
+    {
+        NavigatioManager.NavigateTo("/clienteList");
+    }
+}

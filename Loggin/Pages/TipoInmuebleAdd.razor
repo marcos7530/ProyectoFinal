@@ -1,0 +1,41 @@
+﻿@page "/tipoInmuebleAdd"
+
+@using ClienteSwagger;
+@inject NavigationManager NavigatioManager
+
+
+<EditForm Model="@tipoInmueble">
+    <table class="table">
+        <tr>
+            <td>Descripcion:</td>
+            <td><input class="form-control col-sm-4" type="text" @bind="tipoInmueble.TipoInmuebleDesc" /></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align:center">
+                <input type="submit" value="Save" @onclick="SaveProduct" />
+                <input type="button" value="Cancel" @onclick="Cancel" />
+            </td>
+        </tr>
+    </table>
+</EditForm>
+
+
+
+
+@code {
+
+    private ClienteSwagger client = new ClienteSwagger("https://localhost:7179/", new HttpClient());
+    private TipoInmueble tipoInmueble = new TipoInmueble();
+
+
+    protected async Task SaveProduct()
+    {
+        await client.TipoInmueblePOSTAsync(tipoInmueble);
+        //Cancel();
+    }
+
+    protected void Cancel()
+    {
+        NavigatioManager.NavigateTo("/tipoInmuebleList");
+    }
+}

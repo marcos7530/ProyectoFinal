@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProyectoFinal.Modelo;
 
-namespace ProyectoFinal.Context.Repositorio
+namespace ProyectoFinal.Context.Repositorios
 {
     public class FormaPagoRepositorio
     {
@@ -28,7 +28,7 @@ namespace ProyectoFinal.Context.Repositorio
             await _context.SaveChangesAsync();
         }
 
-        public async Task ActualizarAsync(FormaPago formaPago) 
+        public async Task ActualizarAsync(FormaPago formaPago)
         {
             _context.FormasPagos.Update(formaPago);
             await _context.SaveChangesAsync();

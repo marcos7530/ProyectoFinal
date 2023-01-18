@@ -1,0 +1,57 @@
+﻿@page "/tipoInmuebleList"
+
+<h3>Tipos de Inmuebles</h3>
+<br />
+<a href="/tipoInmuebleAdd" role="button" class="btn btn-success">Agregar</a>
+<br />
+
+@if (result != null)
+{
+    <table class="table table-striped">
+        <thead class="thead-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Descripcion</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+            <tbody>
+            @foreach (ClienteSwagger.TipoInmueble tipoInmueble in result)
+            {
+                <tr>
+                <th>@tipoInmueble.TipoInmuebleId</th>
+                <th>@tipoInmueble.TipoInmuebleDesc</th>
+                    <th><a href="tipoInmuebleUpdate/@tipoInmueble.TipoInmuebleId" role="button" class="btn btn-primary">Editar</a></th>
+                    <th><a href="tipoInmuebleDelete/@tipoInmueble.TipoInmuebleId" role="button" class="btn btn-danger">Eliminar</a></th>
+                    
+                    @*<th><a href="tipoInmuebleUpdate/@tipoInmueble.TipoInmuebleId"><i>Editar</i></a></th>
+                    <th><a href="tipoInmuebleDelete/@tipoInmueble.TipoInmuebleId"><i>Eliminar</i></a></th>*@
+                </tr>
+            }
+            </tbody>
+            </table>
+
+}
+else
+{
+            <h3>No se encontraron resultados</h3>
+}
+
+
+@code {
+
+    private ICollection<ClienteSwagger.TipoInmueble> result;
+
+    private ClienteSwagger.ClienteSwagger client = new ClienteSwagger.ClienteSwagger("https://localhost:7179/", new HttpClient());
+
+    private async Task Refresh()
+    {
+        result = await client.TipoInmuebleAllAsync();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Refresh();
+    }
+}

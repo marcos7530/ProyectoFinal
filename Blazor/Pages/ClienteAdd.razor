@@ -3,38 +3,64 @@
 @using ClienteSwagger;
 @inject NavigationManager NavigatioManager
 
+<style>
+    form{ 
+        border:solid; 
+        border-radius:10px;
+        font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        opacity: 0.85;
+    }
 
-<EditForm Model="@cliente">
-    <table class="form-control col-3" style="text-align:center">
-        <tr>
-            @*<ComboBoxTiposInmuebles></ComboBoxTiposInmuebles>*@
-            <td>Nombre:</td>
-            <td><input class="form-control col-sm-3" type="text" @bind="cliente.ClienteNombre" /></td>
-            <br>
-        </tr>
-        <tr>
-            <td>Direccion:</td>
-            <td><input class="form-control col-sm-3" type="text" @bind="cliente.CleinteDireccion" /></td>
-            <br>
-        </tr>
-        <tr>
-            <td>Correo:</td>
-            <td><input class="form-control col-sm-3" type="text" @bind="cliente.ClienteCorreo" /></td>
-            <br>
-        </tr>
-        <tr>
-            <td>Telefono:</td>
-            <td><input class="form-control col-sm-3" type="tel" @bind="cliente.ClienteTelefono" /></td>
-            <br>
-        </tr>
-        <tr>
-            <td colspan="3" style="text-align:center">
-                <input type="submit" value="Save" @onclick="SaveProduct" />
-                <input type="button" value="Cancel" @onclick="Cancel" />
-            </td>
-        </tr>
-    </table>
-</EditForm>
+    body {
+        background-image: url(https://www.bbva.com/wp-content/uploads/2021/04/casas-ecolo%CC%81gicas_apertura-hogar-sostenibilidad-certificado-.jpg) 
+    }
+</style>
+
+<header>
+
+</header>
+<h3>Agregar nuevo Cliente</h3>
+<br>
+<div class="container text-center">
+    <div class="row align-items-center">
+        <div class="col"></div>
+        <div class="col" style="width=200px; height=300px">
+            <EditForm Model="@cliente">
+                <table class="form-control col-3" style="text-align:center">
+                    <tr>
+                        @*<ComboBoxTiposInmuebles></ComboBoxTiposInmuebles>*@
+                        <td>Nombre:</td>
+                        <td><input class="form-control col-sm-3" type="text" @bind="cliente.ClienteNombre" /></td>
+                        <br>
+                    </tr>
+                    <tr>
+                        <td>Direccion:</td>
+                        <td><input class="form-control col-sm-3" type="text" @bind="cliente.CleinteDireccion" /></td>
+                        <br>
+                    </tr>
+                    <tr>
+                        <td>Correo:</td>
+                        <td><input class="form-control col-sm-3" type="text" @bind="cliente.ClienteCorreo" /></td>
+                        <br>
+                    </tr>
+                    <tr>
+                        <td>Telefono:</td>
+                        <td><input class="form-control col-sm-3" type="tel" @bind="cliente.ClienteTelefono" /></td>
+                        <br>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align:center">
+                            <input type="submit" value="Save" @onclick="SaveProduct" />
+                            <input type="button" value="Cancel" @onclick="Cancel" />
+                        </td>
+                    </tr>
+                </table>
+            </EditForm>
+        </div>
+        <div class="col"> </div>
+    </div>
+</div>
+
 
 
 

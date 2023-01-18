@@ -1,0 +1,52 @@
+﻿@page "/tipoInmuebleDelete/{id:int}"
+
+@using ClienteSwagger;
+@inject NavigationManager NavigatioManager
+
+
+<EditForm Model="@tipoInmueble">
+    <table class="table">
+        <tr>
+            <td>Descripcion:</td>
+            <td><input class="form-control col-sm-4" type="text" @bind="tipoInmueble.TipoInmuebleDesc" /></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align:center">
+                <input type="submit" value="Delete" @onclick="Delete" />
+                <input type="button" value="Cancel" @onclick="Cancel" />
+            </td>
+        </tr>
+    </table>
+</EditForm>
+
+
+
+
+@code {
+
+    [Parameter]
+    public int id { get; set; }
+
+    private ClienteSwagger client = new ClienteSwagger("https://localhost:7179/", new HttpClient());
+    private TipoInmueble tipoInmueble = new TipoInmueble();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (id!=0)
+        {
+            tipoInmueble = await client.TipoInmuebleGETAsync(id);
+        }
+    }
+
+    protected async Task Delete()
+    {
+        await client.TipoInmuebleDELETEAsync(id);
+        Cancel();
+    }
+
+    protected void Cancel()
+    {
+        NavigatioManager.NavigateTo("/tipoInmuebleList");
+    }
+}

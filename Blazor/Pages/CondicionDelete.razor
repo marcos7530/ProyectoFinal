@@ -3,20 +3,44 @@
 @inject NavigationManager NavigatioManager
 
 
-<EditForm Model="@condicion">
-    <table class="form-control-lg">
-        <tr>
-            <td>Descripcion:</td>
-            <td><input class="form-control col-sm-4" type="text" @bind="condicion.CondicionDesc" /></td>
-        </tr>
-        <tr>
-            <td colspan="2" style="text-align:center">
-                <input type="submit" value="Delete" @onclick="Delete" />
-                <input type="button" value="Cancel" @onclick="Cancel" />
-            </td>
-        </tr>
-    </table>
-</EditForm>
+<style>
+    form {
+        border: solid;
+        border-radius: 10px;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        opacity: 0.85;
+    }
+
+    body {
+        background-image: url(https://www.bbva.com/wp-content/uploads/2021/04/casas-ecolo%CC%81gicas_apertura-hogar-sostenibilidad-certificado-.jpg)
+    }
+</style>
+
+<h3>Desea eliminar la Condicion?</h3>
+<br>
+<div class="container text-center">
+    <div class="row align-items-center">
+        <div class="col"></div>
+        <div class="col" style="width=200px; height=300px">
+            <EditForm Model="@condicion">
+                <table class="form-control col-3" style="text-align:center">
+                    <tr>
+                        <td>Descripcion:</td>
+                        <td><input class="form-control col-sm-4" type="text" @bind="condicion.CondicionDesc" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align:center">
+                            <input type="submit" value="Eliminar" @onclick="Delete" />
+                            <input type="button" value="Cancel" @onclick="Cancel" />
+                        </td>
+                    </tr>
+                </table>
+            </EditForm>
+
+        </div>
+        <div class="col"> </div>
+    </div>
+</div>
 
 
 

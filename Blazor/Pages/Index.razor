@@ -1,6 +1,133 @@
 ﻿@page "/"
+@using ClienteSwagger
 
-<PageTitle>Index</PageTitle>
+<select class="form-select">
+    @if (listaTiposInmueble != null)
+    {
+        <option value="0">Selecione Tipo</option>
+        @foreach (TipoInmueble tipo in listaTiposInmueble)
+        {
+          <option value="@tipo.TipoInmuebleId">@tipo.TipoInmuebleDesc</option>
+        }
+    }
+    else
+    {
+        <option value="0">La lista esta vacia</option>
+    }
+</select>
+
+
+<select class="form-select">
+    @if (listaInmueble != null)
+    {
+        <option value="0">Selecione Inmueble</option>
+        @foreach (Inmueble inmueble in listaInmueble)
+        {
+          <option value="@inmueble.InmuebleId">@inmueble.InmuebleUbic</option>
+        }
+    }
+    else
+    {
+        <option value="0">La lista esta vacia</option>
+    }
+</select>
+
+<select class="form-select">
+    @if (listaCliente != null)
+    {
+        <option value="0">Selecione Cliente</option>
+        @foreach (Cliente cliente in listaCliente)
+        {
+          <option value="@cliente.ClienteId">@cliente.ClienteNombre</option>
+        }
+    }
+    else
+    {
+        <option value="0">La lista esta vacia</option>
+    }
+</select>
+
+<select class="form-select">
+    @if (listaCondicion != null)
+    {
+        <option value="0">Selecione Condicion</option>
+        @foreach (Condicion condicion in listaCondicion)
+        {
+          <option value="@condicion.CondicionId">@condicion.CondicionDesc</option>
+        }
+    }
+    else
+    {
+        <option value="0">La lista esta vacia</option>
+    }
+</select>
+
+<select class="form-select">
+    @if (listaFormaPago != null)
+    {
+        <option value="0">Selecione Forma Pago</option>
+        @foreach (FormaPago formaPago in listaFormaPago)
+        {
+          <option value="@formaPago.FormaPagoId">@formaPago.FormaPagoDesc</option>
+        }
+    }
+    else
+    {
+        <option value="0">La lista esta vacia</option>
+    }
+</select>
+
+
+
+@code {
+    private ClienteSwagger client = new ClienteSwagger("https://localhost:7179/", new HttpClient());
+
+
+    private ICollection<TipoInmueble> listaTiposInmueble { get; set; }
+
+
+    private ICollection<Inmueble> listaInmueble { get; set; }
+
+    private ICollection<Cliente> listaCliente { get; set; }
+
+    private ICollection<Condicion> listaCondicion { get; set; }
+
+    private ICollection<FormaPago> listaFormaPago { get; set; }
+
+
+
+    protected override async Task  OnInitializedAsync()
+    {
+        await iniciar();
+    }
+
+    protected  async Task iniciar()
+    {
+        listaTiposInmueble = await client.TipoInmuebleAllAsync();
+
+        listaInmueble = await client.InmuebleAllAsync();
+
+        listaCliente = await client.ClienteAllAsync();
+
+        listaCondicion = await client.CondicionAllAsync();
+
+        listaFormaPago = await client.FormaPagoAllAsync();
+
+
+
+
+        await Task.Delay(1000);
+    }
+}
+
+
+
+@*<iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d56959.19801057027!2d-65.24213784667967!3d-26.841546527224295!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2sar!4v1673992448709!5m2!1ses!2sar" 
+width="1600" height="900" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>*@
+
+
+
+@*<PageTitle>Index</PageTitle>
 
 @if (result!=null)
 {
@@ -29,3 +156,4 @@
         await Refresh();
     }
 }
+*@

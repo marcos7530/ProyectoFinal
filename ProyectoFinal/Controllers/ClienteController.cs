@@ -58,14 +58,16 @@ namespace ProyectoFinal.Controllers
 
             await _servicio.UpdateAsync(cliente);
 
-            return NoContent();
+            //return NoContent();
+            return Ok();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
             await _servicio.DeleteAsync(id);
-            return NoContent();
+            //return NoContent();
+            return Ok();
         }
 
     }

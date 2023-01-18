@@ -1,0 +1,31 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+
+@if (result!=null)
+{
+    @foreach (ClienteSwagger.TipoInmueble tipoInmueble in result)
+    {
+    <div>
+        @tipoInmueble.TipoInmuebleId -
+        @tipoInmueble.TipoInmuebleDesc
+    </div>    
+    
+    }
+}
+
+
+@code{
+    private ICollection<ClienteSwagger.TipoInmueble> result;
+    private ClienteSwagger.ClienteSwagger client = new ClienteSwagger.ClienteSwagger("https://localhost:7179/", new HttpClient());
+
+    private async Task Refresh()
+    {
+        result = await client.TipoInmuebleAllAsync();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Refresh();
+    }
+}

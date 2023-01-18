@@ -3,38 +3,80 @@
 @using ClienteSwagger;
 @inject NavigationManager NavigatioManager
 
+<style>
+    form{ 
+        border:solid; 
+        border-radius:10px;
+        font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        opacity: 0.85;
+    }
 
-<EditForm Model="@inmueble">
-    <table class="form-control " style="text-align:center">
-        <tr>
-            @*<ComboBoxTiposInmuebles></ComboBoxTiposInmuebles>*@
+    body {
+        background-image: url(https://www.bbva.com/wp-content/uploads/2021/04/casas-ecolo%CC%81gicas_apertura-hogar-sostenibilidad-certificado-.jpg) 
+    }
+</style>
+
+<h3>Agregar Inmueble</h3>
+<br>
+<div class="container text-center">
+    <div class="row align-items-center">
+        <div class="col"></div>
+        <div class="col align-content-center">
+           <EditForm Model="@inmueble">
+                <table class="form-control">
+        <tr style="align-content:center">
             <td>Tipo:</td>
-            <td><input class="form-control col-sm-4" type="number" @bind="inmueble.TipoInmuebleId" /></td>
+            <td>
+                <select  @bind="inmueble.TipoInmuebleId" class="form-select"  >
+                    @if (lista != null)
+                    {
+                        <option value="0">Selecione Tipo</option>
+                        @foreach (TipoInmueble tipo in lista)
+                        {
+                           
+                          <option value="@tipo.TipoInmuebleId">@tipo.TipoInmuebleDesc</option>
+                        }
+                    }
+                    else
+                    {
+                        <option value="0">La lista esta vacia</option>
+                    }
+                </select>
+                @{
+                    //inmueble.TipoInmuebleId
+                }
+            </td>
+           @*<td><input class="form-control" type="number" @bind="inmueble.TipoInmuebleId" /></td>*@
             <br>
         </tr>
         <tr>
             <td>Descripcion:</td>
-            <td><input class="form-control col-sm-4" type="text" @bind="inmueble.InmuebleDesc" /></td>
+            <td><input class="form-control" type="text" @bind="inmueble.InmuebleDesc" /></td>
             <br>
         </tr>
         <tr>
             <td>Ubicacion:</td>
-            <td><input class="form-control col-sm-4" type="text" @bind="inmueble.InmuebleUbic" /></td>
+            <td><input class="form-control" type="text" @bind="inmueble.InmuebleUbic" /></td>
             <br>
         </tr>
         <tr>
             <td>Costo:</td>
-            <td><input class="form-control col-sm-4" type="number" @bind="inmueble.InmuebleCosto" /></td>
+            <td><input class="form-control" type="number" @bind="inmueble.InmuebleCosto" /></td>
             <br>
         </tr>
         <tr>
             <td colspan="2" style="text-align:center">
-                <input type="submit" value="Save" @onclick="SaveProduct" />
+                <input  type="submit" value="Save" @onclick="SaveProduct" />
                 <input type="button" value="Cancel" @onclick="Cancel" />
             </td>
         </tr>
     </table>
 </EditForm>
+        </div>
+        <div class="col"> </div>
+    </div>
+</div>
+
 
 
 
@@ -42,6 +84,8 @@
 @code {
 
     private Inmueble inmueble = new Inmueble();
+
+
 
     private ClienteSwagger client = new ClienteSwagger("https://localhost:7179/", new HttpClient());
 
@@ -53,6 +97,22 @@
 
     protected void Cancel()
     {
-        NavigatioManager.NavigateTo("/tipoInmuebleList");
+        NavigatioManager.NavigateTo("/inmuebleList");
     }
+
+    private ICollection<TipoInmueble> lista { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await iniciar();
+    }
+
+    protected async Task iniciar()
+    {
+        lista = await client.TipoInmuebleAllAsync();
+        await Task.Delay(1000);
+    }
+
+
+
 }

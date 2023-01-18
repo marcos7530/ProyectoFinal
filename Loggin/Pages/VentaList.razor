@@ -1,0 +1,72 @@
+﻿@page "/ventaList"
+
+<h3>Ventas</h3>
+<br />
+<a href="/ventaAdd" role="button" class="btn btn-success">Agregar</a>
+<br />
+
+@if (result != null)
+{
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>Inmueble</th>
+                <th>Cliente</th>
+                <th>Condicion</th>
+                <th>Forma de Pago</th>
+                <th>Descripcion</th>
+                <th>Total Venta</th>
+                <th>Total Iva</th>
+                <th>Total General</th>
+                <th>Fecha de venta</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ClienteSwagger.Venta venta in result)
+            {
+                <tr>
+                    <th>@venta.VentaId</th>
+                    <th>@venta.InmuebleId</th>
+                    <th>@venta.ClienteId</th>
+                    <th>@venta.CondicionId</th>
+                    <th>@venta.FormaPagoId</th>
+                    <th>@venta.VentaDesc</th>
+                    <th>@venta.VentaTotal</th>
+                    <th>@venta.VentaTotalIva</th>
+                    <th>@venta.VentaTotalGeneral</th>
+                    <th>@venta.VentaFecha</th>
+                    <th><a href="ventaUpdate/@venta.VentaId" role="button" class="btn btn-primary">Editar</a></th>
+                    <th><a href="ventaDelete/@venta.VentaId" role="button" class="btn btn-danger">Eliminar</a></th>
+
+                   @* <th><a href="ventaUpdate/@venta.VentaId"><i>Editar</i></a></th>
+                    <th><a href="ventaDelete/@venta.VentaId"><i>Eliminar</i></a></th>*@
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h3>No se encontraron resultados</h3>
+}
+
+
+@code {
+
+    private ICollection<ClienteSwagger.Venta> result;
+
+    private ClienteSwagger.ClienteSwagger client = new ClienteSwagger.ClienteSwagger("https://localhost:7179/", new HttpClient());
+
+    private async Task Refresh()
+    {
+        result = await client.VentaAllAsync();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Refresh();
+    }
+}

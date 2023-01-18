@@ -1,0 +1,56 @@
+﻿@page "/condicionList"
+
+<h3>Condiciones</h3>
+<br />
+<a href="/condicionAdd" role="button" class="btn btn-success">Agregar</a>
+<br />
+
+@if (result != null)
+{
+    <table class="table table-striped ">
+        <thead class="thead-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Descripcion</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (ClienteSwagger.Condicion condicion in result)
+            {
+                    <tr>
+                    <th>@condicion.CondicionId</th>
+                    <th>@condicion.CondicionDesc</th>
+                    <th><a href="condicionUpdate/@condicion.CondicionId" role="button" class="btn btn-primary">Editar</a></th>
+                    <th><a href="condicionDelete/@condicion.CondicionId" role="button" class="btn btn-danger">Eliminar</a></th>
+@*
+                    <th><a href="condicionUpdate/@condicion.CondicionId"><i>Editar</i></a></th>
+                    <th><a href="condicionDelete/@condicion.CondicionId"><i>Eliminar</i></a></th>*@
+                    </tr>
+            }
+            </tbody>
+        </table>
+}
+else
+{
+        <h3>No se encontraron resultados</h3>
+}
+
+
+@code {
+
+    private ICollection<ClienteSwagger.Condicion> result;
+
+    private ClienteSwagger.ClienteSwagger client = new ClienteSwagger.ClienteSwagger("https://localhost:7179/", new HttpClient());
+
+    private async Task Refresh()
+    {
+        result = await client.CondicionAllAsync();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Refresh();
+    }
+}

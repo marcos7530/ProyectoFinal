@@ -1,0 +1,57 @@
+﻿@page "/formaPagoList"
+
+<h3>Formas de Pago</h3>
+<br />
+<a href="/formaPagoAdd" role="button" class="btn btn-success">Agregar</a>
+<br />
+
+@if (result!=null)
+{
+    <table class="table table-striped ">
+        <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>Descripcion</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ClienteSwagger.FormaPago formaPago in result)
+        {
+                    <tr>
+                        <th>@formaPago.FormaPagoId</th>
+                        <th>@formaPago.FormaPagoDesc</th>
+                    <th><a href="formaPagoUpdate/@formaPago.FormaPagoId" role="button" class="btn btn-primary">Editar</a></th>
+                    <th><a href="formaPagoDelete/@formaPago.FormaPagoId" role="button" class="btn btn-danger">Eliminar</a></th>
+
+                       @* <th><a href="formaPagoUpdate/@formaPago.FormaPagoId"><i>Editar</i></a></th>
+                        <th><a href="formaPagoDelete/@formaPago.FormaPagoId"><i>Eliminar</i></a></th>*@
+                    </tr>
+        }
+            </tbody>
+        </table>
+
+}
+else
+{
+    <h3>No se encontraron resultados</h3>
+}
+
+
+@code {
+   
+    private ICollection<ClienteSwagger.FormaPago> result;
+
+    private ClienteSwagger.ClienteSwagger client = new ClienteSwagger.ClienteSwagger("https://localhost:7179/", new HttpClient());
+
+    private async Task Refresh()
+    {
+        result = await client.FormaPagoAllAsync();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Refresh();
+    }
+}

@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using ProyectoFinal.Context;
-using ProyectoFinal.Context.Repositorio;
 using ProyectoFinal.Context.Repositorios;
 using ProyectoFinal.Controllers;
 

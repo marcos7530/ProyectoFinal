@@ -1,0 +1,41 @@
+﻿@page "/condicionAdd"
+
+@using ClienteSwagger;
+@inject NavigationManager NavigatioManager
+
+
+<EditForm Model="@condicion">
+    <table class="table">
+        <tr>
+            <td>Descripcion:</td>
+            <td><input class="form-control col-sm-4" type="text" @bind="condicion.CondicionDesc" /></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align:center">
+                <input type="submit" value="Save" @onclick="SaveProduct" />
+                <input type="button" value="Cancel" @onclick="Cancel" />
+            </td>
+        </tr>
+    </table>
+</EditForm>
+
+
+
+
+@code {
+   
+    private Condicion condicion = new Condicion();
+    private ClienteSwagger client = new ClienteSwagger("https://localhost:7179/", new HttpClient());
+
+  
+    protected async Task SaveProduct()
+    {
+        await client.CondicionPOSTAsync(condicion);
+        Cancel();
+    }
+
+    protected void Cancel()
+    {
+        NavigatioManager.NavigateTo("/condicionList");
+    }
+}

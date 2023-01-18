@@ -1,4 +1,4 @@
-﻿using ProyectoFinal.Context.Repositorio;
+﻿using ProyectoFinal.Context.Repositorios;
 using ProyectoFinal.Modelo;
 
 namespace ProyectoFinal.Controllers

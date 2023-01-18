@@ -3,64 +3,162 @@
 @using ClienteSwagger;
 @inject NavigationManager NavigatioManager
 
+<style>
+    form{ 
+        border:solid; 
+        border-radius:10px;
+        font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        opacity: 0.85;
+    }
 
-<EditForm Model="@venta">
-    <table class="form-control col-3" style="text-align:center">
-        <tr>
-            @*<ComboBoxTiposInmuebles></ComboBoxTiposInmuebles>*@
-            <td>Inmueble:</td>
-            <td><input class="form-control col-sm-3" type="number" @bind="venta.InmuebleId" /></td>
-            <br>
-        </tr>
-        <tr>
-            <td>Cliente:</td>
-            <td><input class="form-control col-sm-3" type="number" @bind="venta.ClienteId" /></td>
-            <br>
-        </tr>
-        <tr>
-            <td>Condicion:</td>
-            <td><input class="form-control col-sm-3" type="number" @bind="venta.CondicionId" /></td>
-            <br>
-        </tr>
-        <tr>
-            <td>FormaPago:</td>
-            <td><input class="form-control col-sm-3" type="number" @bind="venta.FormaPagoId" /></td>
-            <br>
-        </tr>
-        <tr>
-            <td>Descripcion:</td>
-            <td><input class="form-control col-sm-3" type="text" @bind="venta.VentaDesc" /></td>
-            <br>
-        </tr>
-        <tr>
-            <td>Total Venta:</td>
-            <td><input class="form-control col-sm-3" type="number" @bind="venta.VentaTotal" /></td>
-            <br>
-        </tr>
-        <tr>
-            <td>Total IVA:</td>
-            <td><input class="form-control col-sm-3" type="number" @bind="venta.VentaTotalIva" /></td>
-            <br>
-        </tr>
-        <tr>
-            <td>Total General:</td>
-            <td><input class="form-control col-sm-3" type="number" @bind="venta.VentaTotalGeneral" /></td>
-            <br>
-        </tr>
-        <tr>
-            <td>Fecha Venta:</td>
-            <td><input class="form-control col-sm-3" type="date" @bind="venta.VentaFecha" /></td>
-            @*<td><input class="form-control col-sm-3" type="date" @bind="venta.VentaFecha"></td>*@
-            <br>
-        </tr>
-        <tr>
-            <td colspan="3" style="text-align:center">
-                <input type="submit" value="Save" @onclick="SaveProduct" />
-                <input type="button" value="Cancel" @onclick="Cancel" />
-            </td>
-        </tr>
-    </table>
-</EditForm>
+    body {
+        background-image: url(https://www.bbva.com/wp-content/uploads/2021/04/casas-ecolo%CC%81gicas_apertura-hogar-sostenibilidad-certificado-.jpg) 
+    }
+</style>
+
+<nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+    <span class="navbar-brand mb-0 h1">
+        <h3>Nueva Venta</h3>
+    </span>
+  </div>
+</nav>
+
+<br>
+<div class="container text-center">
+    <div class="row align-items-center">
+        <div class="col"></div>
+        <div class="col">
+            <EditForm Model="@venta">
+                <table class="form-control col-3" style="text-align:center">
+                    <tr>
+                        <td>Inmueble:</td>
+                        <td>
+                            <select @bind="venta.InmuebleId"  class="form-select">
+                                @if (listaInmueble != null)
+                                {
+                                <option value="0">Selecione Inmueble</option>
+                                    @foreach (Inmueble inmueble in listaInmueble)
+                                    {
+                                     <option value="@inmueble.InmuebleId">@inmueble.InmuebleUbic</option>
+                                    
+                                    }
+                                }
+                                else
+                                {
+                                <option value="0">La lista esta vacia</option>
+                                }
+                                </select>
+                        </td>
+                        @*<td><input class="form-control col-sm-3" type="number" @bind="venta.InmuebleId" /></td>*@
+                        <br>
+                    </tr>
+                    <tr>
+                        <td>Cliente:</td>
+                        <td>
+                            <select @bind="venta.ClienteId" class="form-select">
+                                @if (listaCliente != null)
+                                {
+                                <option value="0">Selecione Cliente</option>
+                                    @foreach (Cliente cliente in listaCliente)
+                                    {
+                                     <option value="@cliente.ClienteId">@cliente.ClienteNombre</option>
+                                    
+                                    }
+                                }
+                                else
+                                {
+                                 <option value="0">La lista esta vacia</option>
+                                }
+                            </select>
+                        </td>
+                        @*<td><input class="form-control col-sm-3" type="number" @bind="venta.ClienteId" /></td>*@
+                        <br>
+                    </tr>
+                    <tr>
+                        <td>Condicion:</td>
+                        <td>
+                              <select @bind="venta.CondicionId" class="form-select">
+                                @if (listaCondicion != null)
+                                {
+                                 <option value="0">Selecione Condicion</option>
+                                    @foreach (Condicion condicion in listaCondicion)
+                                    {
+                                     <option value="@condicion.CondicionId">@condicion.CondicionDesc</option>
+                                 
+                                    }
+                                }
+                                else
+                                {
+                                <option value="0">La lista esta vacia</option>
+                                }
+                              </select>
+                        </td>
+                        @*<td><input class="form-control col-sm-3" type="number" @bind="venta.CondicionId" /></td>*@
+                        <br>
+                    </tr>
+                    <tr>
+                        <td>FormaPago:</td>
+                        <td>
+                            <select @bind="venta.FormaPagoId" class="form-select">
+                                @if (listaFormaPago != null)
+                                {
+                                <option value="0">Selecione Forma Pago</option>
+                                    @foreach (FormaPago formaPago in listaFormaPago)
+                                    {
+                                     <option value="@formaPago.FormaPagoId">@formaPago.FormaPagoDesc</option>
+                                    }
+                                }
+                                else
+                                {
+                                <option value="0">La lista esta vacia</option>
+                                }
+                            </select>
+                        </td>
+                        @*<td><input class="form-control col-sm-3" type="number" @bind="venta.FormaPagoId" /></td>*@
+                        <br>
+                    </tr>
+                    <tr>
+                        <td>Descripcion:</td>
+                        <td><input class="form-control col-sm-3" type="text" @bind="venta.VentaDesc" /></td>
+                        <br>
+                    </tr>
+                    <tr>
+                        <td>Total Venta:</td>
+                        <td><input class="form-control col-sm-3" type="number" @bind="venta.VentaTotal" /></td>
+                        <br>
+                    </tr>
+                    <tr>
+                        <td>Total IVA:</td>
+                        @*disabled*@
+                        <td><input class="form-control col-sm-3" type="number" @bind="venta.VentaTotalIva"  /></td>
+                        <br>
+                    </tr>
+                    <tr>
+                        @*disabled*@
+                        <td>Total General:</td>
+                        <td><input class="form-control col-sm-3" type="number" @bind="venta.VentaTotalGeneral" /></td>
+                        <br>
+                    </tr>
+                    <tr>
+                        <td>Fecha Venta:</td>
+                        <td><input class="form-control col-sm-3" type="date" @bind="venta.VentaFecha" /></td>
+                        @*<td><input class="form-control col-sm-3" type="date" @bind="venta.VentaFecha"></td>*@
+                        <br>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align:center">
+                            <input type="submit" value="Save" @onclick="Save" />
+                            <input type="button" value="Cancel" @onclick="Cancel" />
+                        </td>
+                    </tr>
+                </table>
+            </EditForm>
+        </div>
+        <div class="col"> </div>
+    </div>
+</div>
+
 
 
 
@@ -71,9 +169,17 @@
 
     private DateTime fecha = DateTime.Now;
 
+    private ICollection<Inmueble> listaInmueble { get; set; }
+
+    private ICollection<Cliente> listaCliente { get; set; }
+
+    private ICollection<Condicion> listaCondicion { get; set; }
+
+    private ICollection<FormaPago> listaFormaPago { get; set; }
+
     private ClienteSwagger client = new ClienteSwagger("https://localhost:7179/", new HttpClient());
 
-    protected async Task SaveProduct()
+    protected async Task Save()
     {
         await client.VentaPOSTAsync(venta);
         Cancel();
@@ -83,4 +189,29 @@
     {
         NavigatioManager.NavigateTo("/ventaList");
     }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await iniciar();
+    }
+
+    protected async Task iniciar()
+    {
+
+        listaInmueble = await client.InmuebleAllAsync();
+
+        listaCliente = await client.ClienteAllAsync();
+
+        listaCondicion = await client.CondicionAllAsync();
+
+        listaFormaPago = await client.FormaPagoAllAsync();
+
+        await Task.Delay(1000);
+    }
+
+
+
 }
+
+

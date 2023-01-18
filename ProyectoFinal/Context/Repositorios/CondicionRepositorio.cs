@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProyectoFinal.Context.Repositorio;
+//using ProyectoFinal.Context.Repositorio;
 using ProyectoFinal.Controllers;
 using ProyectoFinal.Modelo;
 
